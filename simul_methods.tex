@@ -1,0 +1,70 @@
+\subsection{Simulation study}
+
+We simulated the natural history of breast cancer as an illness-death model with the three states and transitions $S_0 \rightarrow S_p \rightarrow S_c$. The following assumptions were made:
+
+\begin{enumerate}
+
+\item \textbf{Simulation procedures:} 
+
+For each specific combination of assumptions, the same database of simulated datasets was used to compare the statistical methods of interest. Non-convergence failures were monitored and used to assess if inadequate assumptions were made. The {\tt R} random sampling functions for specific distributions were used to generate the random variables. To enable replication of the datasets, a seed was specified. We simulated 500 datasets with 62,000 women in each dataset. 
+
+\item \textbf{Methods for generating the datasets:} 
+
+\begin{enumerate}
+
+\item \textbf{Time scale}: Age is the time scale with age 50 years as the origin.
+
+\item \textbf{Time to the pre-clinical state, $T_p$}: We assume that it follows a Weibull distribution, We$(\lambda,\nu)$ with $\lambda$ and $\nu$ the scale and shape parameters, respectively, where $h_0(t)=\lambda \nu t^{\nu-1}$ is the baseline risk function of a conventional relative risk model. Times to $S_p$ were generated using the method proposed by Austin \cite{Austin2012, Bender2005} for Cox models.
+
+\item \textbf{Time to study entry, $T_e$}: We will make two assumptions, without and with late entry. For the late entry scenario we assume that the time at entering follows a uniform distribution, $U(0,15)$, and all the data previous to $T_e$ will not be used.
+
+\item \textbf{Sojourn time in the pre-clinical state, $T_s$}: We assume that it follows an exponential distribution Exp(0.25), wich corresponds to a mean time in $S_p$ equal to 4 years \cite{Lee1998}. 
+
+\item \textbf{Time to the clinical state, $T_c$}: $T_c=T_p+T_s$.
+
+\item \textbf{Mammogram sensitivity}: We assume two different values, 100\% and 85\%. We assume that each screening exam is independent within a woman over time.   
+
+\item \textbf{Incidence of false positive results}: We assumed binomial distributions with varying probabilities conditional to the exam sequence number, according to the Rom\'an study \cite{Roman2012}. 
+
+\item \textbf{Effect of false positive results on incidence of breast cancer}:  
+
+The presence of a false positive result will modify the hazard of entering the pre-clinical state according to a relative risks model. Times to $S_p$ were generated using the closed-form expression proposed by Austin \cite{Austin2012} for Cox models with time varying covariates.
+
+\item \textbf{Dropout}: One scenario assumed that dropout occurred randomly during the follow-up. Participation rates of the INCA study at the successive exams were used to generate the dropout. Another, more realistic, scenario assumed that censoring times were associated with false positive results. That assumption was based on evidence that a false positive result produces a decrease in the adherence to screening, and this decrease is more pronounced if the false positive result occurs in the early exams. The RAFP study \cite{Roman2011b}, which included women of similar characteristics as in the INCA study and used a multilevel discrete hazard model, was used to simulate a dropout associated to false positive results.
+ 
+\item \textbf{Number of screening exams}: We assumed two scenarios, four exams as in the INCA study dataset and ten exams as in the majority of the European mass screening programs. We followed-up each woman until the first occurrence of breast cancer diagnosis, administrative censoring at 8 (INCA) or 20 years of follow-up, and dropout during the study.
+
+\end{enumerate}
+
+\item \textbf{Scenarios to be investigated}:
+\begin{enumerate}
+\item With / without late entry.
+\item We fixed the parameters for the Weibull distribution using the INCA-Cat dataset, $scale=0.00025$ and $shape=1.5712$.
+\item Hazard ratio of false positive result for time to entering $S_p$, values 1.5 and 4.
+\item Dropout: random or related to the false positive results.
+\end{enumerate}
+
+\item \textbf{Statistical methods to be evaluated}:
+\begin{enumerate}
+\item We used the {\tt msm} package in {\tt R} developed by Jackson \cite{Jackson2011} to fit the multi-state models. The {\tt msm} package a) assumes time-homogeneous or piecewise constant hazards. This is a limitation given that we have assumed a Weibull distribution for the time to $S_p$, and an exponential distribution for the sojourn time in $S_p$; b) allows for interval censored transitions and this can be considered a strength of the {\tt msm} package; c) allows for misclassification of states, which is also an asset, given that mammography has sensitivity and specificity lower than 100\%.
+
+\item We estimated the effect of a FP result with the Cox model. We applied a cause-specific strategy for SD and IC, separately. The counting process structure allows to account for left-truncation and time-dependent covariates, as well as non proportional-hazards. We used the {\tt coxph} function of the {\tt survival} package {\tt R}.
+
+\item We estimated the discrete-time model using a logit link for the hazard of the event. The model contains a time indicator variable given by the women's screening participation which acts as multiple intercepts, one per period \cite{Roman2011b}. The time indicator variable represents the baseline logit hazard function \cite{Singer2003}. As in the Cox model, we applied a cause-specific strategy for SD and IC, separately. We considered that the event time corresponds to the last screening participation. We used the {\tt glm} function of the {\tt stats} package in {\tt R}.
+
+\end{enumerate}
+
+\item \textbf{Summary measures of performance}: absolute bias, relative bias (as percentage of the true value), mean square error, and coverage of confidence intervals.
+ 
+ \end{enumerate}
+
+\paragraph{}In each simulation, we focus on quantifying the potential bias due to late-entry and the censoring after detection of pre-clinical cancer. To quantify the bias due to late-entry, we performed two simulations for each scenario, with and without late-entry. The second potential bias is due to the fact that the sojourn time is informatively censored. A woman with a screen detected cancer receives treatment and therefore, it is not possible to observe the time to $S_c$. We assess the effect of not observing the time to $S_c$, when evaluating the effect of a FP result on entering the pre-clinical state $S_p$.
+
+\paragraph{} As a secondary analysis we reduced the three-state model to a two-state model with 1: $S_0$ (absence of breast cancer) and 2: $S_p$ or $S_c$ (breast cancer). Here the time $T$ of interest is age at breast cancer diagnosis (either screen-detected or symptomatically detected). $T$ can be right censored since each women is followed until breast cancer, or end of study. Lost to follow-up is simulated as non-related or related to the false positive status. For clinically diagnosed tumours, we also assessed the effect of extending the follow-up to the next screening exam for estimating the effect of a FP result on the incidence of breast cancer, indistinctly screen-detected or symptomatic.
+
+
+
+
+
+
+

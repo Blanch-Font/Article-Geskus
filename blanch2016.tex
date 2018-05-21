@@ -1,0 +1,67 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{fancyref}
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage[all]{xy}
+\usepackage{cite}
+\usepackage{url}
+\usepackage{geometry}
+\usepackage{pdflscape}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{threeparttablex}
+
+\renewcommand{\baselinestretch}{1.25}
+
+%\usepackage[sort&compress]{natbib}
+%\graphicspath{ {/home/jordi/Dropbox/INCA/articulo competing risks} }
+\author{Jordi Blanch, Ronald B. Geskus, Maria Sala, Xavier Castells, and Montserrat Ru\'e}
+\title{Multi-state versus semi-parametric Cox and discrete-time models for assessing the effect of false-positive results of mammogram on breast cancer risk}
+
+
+\begin{document}
+
+\maketitle
+\begin{abstract}
+\end{abstract}
+
+
+
+\input{intro}
+\input{motivdata}
+\input{methods}
+\input{simul_methods}
+\input{results}
+\clearpage
+\input{discussion}
+\clearpage
+\input{tables}
+\clearpage
+\input{figures}
+\clearpage
+
+\section{Acknowledgement}
+This paper was supported by the research grant PRX16/00028 from the Spanish Ministry of Education, Culture and Sports, and partially supported by the research grant PI14/00113 from the Spanish Ministry of Economy and Competitiveness and by GRAES-2014-SGR978 from the Generalitat de Catalunya. We thank the researchers of the RAFP and INCA projects for having provided their data.
+
+
+\noindent {\bf{Conflict of Interest}}
+
+\noindent {\it{The authors have declared no conflict of interest.}}
+
+
+\newpage
+
+\appendix
+\input{appendix}
+\newpage
+
+
+\bibliographystyle{wileyj}
+\bibliography{bib/blanch}
+
+\end{document} 

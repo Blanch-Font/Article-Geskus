@@ -1,0 +1,189 @@
+\section{Discussion}
+% + Resum dels resultats
+This study assessed the biases induced by early detection on the estimates of the effect of a
+mammographic FP result on the progression to pre-clinical and clinical BC. In addition, we
+evaluated the effect estimates obtained via parametric multi-state models, which are seldom used in
+the screening literature, and semi-parametric Cox models or discrete-time models, which are common
+in this area. A simulation study, has provided information on how the assumptions of the
+statistical models, or the fact that these models are applied to data partially observed, affect
+the parameter estimates. 
+
+% + Comentari dels resultats.
+%   - Pq ens surten aquests resultats
+\paragraph{}The simulation study showed that, in general, all the models considered had an
+acceptable performance for estimating the effect of a FP result, in the different scenarios
+assessed. When we worked with three health states, $S_0$, $S_p$ and $S_c$, the multi-state model
+showed the best performance in all the scenarios, either for complete or observed data followed by
+the Cox cause-specific which had good performance and then the discrete time model with a fair
+performance. The simulation analysis of the two state models, also showed a good performance of the
+three models considered. The multi-state model with no late entry showed the best performance
+followed by discrete-time with time at the next screen for the clinically diagnosed tumours, and
+then the Cox model in all the assessed scenarios. Therefore, with simulated data of BC screening,
+all the studied models seem good candidates to estimate the impact of a FP result in BC screening 
+
+%   - Resultats per l'INCA. Els he passat a l'apartat de resultats.
+\paragraph{}When the studied methods were applied to the INCA study and three states were
+considered, the multi-state and the Cox cause-specific models provided similar results for the
+$S_0 \rightarrow S_p$ transition, whereas the discrete time model differed from them. When both
+pre-clinical and clinical cancers were collapsed, again the multi-state and the Cox model provided
+similar results. in this scenario the discrete time model did not differed much from the
+multi-state and the Cox models.
+
+% Sobre l'escala del temps
+% - MSM i Cox utilitzen l'edat com escala temporal.
+% - En canvi, el temps-discret utilitza el número de participacions
+% - L'edat és una escala més pròxima al temps 'real' de la malaltia.
+% - En canvi, el nombre de participacions suposo que el temps entre
+%   participacions ha de ser de dos anys. Però en la vida 'real' no
+%   sempre pasa.
+\paragraph{}The major difference between MSM and Cox; and discrete-time models are the underline
+time. In the MSM and Cox models the underline time is age from 49 years old and the discrete-time
+models uses the number of participations as underline time. Age as time is correlated with the real
+time of the breast cancer progression. In the other hand, the number of participation is not
+correlated with the time of BC progression, because the first participation could be in the 50
+years or in the 60 years and the model assume the same risk for all women in their participation.
+Also, woman could not come to one participation and the time between participations will be more
+than the ``theoretical'' 2 years.
+
+%**** Work in progress ******
+%\subsection{Comparison with other studies}
+%In the literature of breast cancer screening, there are two main approaches, studies that simulate the screening process to evaluate the impact of screening -as quality of live [Rue], change of analogic to digital mammogram [Comas], overdiagnosis [de Gelder], ...-, or studies that estimate the effect of covariates on the diagnosis of breast cancer -as the effect of a FP result [Castells, Blanch2014, von Euler, Henderson2015], or other variables [Blanch2014, Hofvind2006], screen-detected [blanch, duffy, chen, Uhry, Ripping2016]. We have not found studies that assessed the performance of different methods for estimating the effect of covariates on breast cancer diagnosis in women participating in screening, and taking into account if the cancer was screen-detected or interval cancer.
+
+% En la literatura del cribratge de CM, tenim dos vessants els que simulen el cribratge per evaluar
+% algun aspecte (qualitat de vida (Rue), canvi de t`ecnica (Comas), sobrediagn`ostic (de Gelder), entre
+% altres) i els que estimen l'efecte sobre el diagostic de CM (efecte del FP (Castells, Blanch2014,
+% von Euler, Henderson2015), efecte d'altres variables (p.e. Blanch2014, Hofvind2006), detecci'o
+% (blanch, duffy, chen, Uhry, Ripping2016)). No en coneixem cap que estudi quin 'es el millor m`etode
+% per a estimar l'efecte sobre la detecci'o del CM segons el m`etode de detecci'o.
+
+%\paragraph{}Some papers in the literature that used multi-state models focused on the estimation of the sojourn
+%time in $S_p$ [4 ref]. We have not found any study that used multi-state models to estimate the effect of having a FP result in a previous exam. Some studies estimated the effect of other variables, as history of breast disease, number of births, or family history of breast cancer.
+% Els articles que han utilitzat models multi-estat s'han centrat en estimar el temps de
+% sojourn [4 ref]. No hem trobat cap que usi aquests models per estimar l'efecte del FP. Sí que s'ha
+% estimat l'efecte d'altres variables, com la hist`oria de malaltia mamaria, nombre de fills, hist`oria
+% familiar de CM, entre altres.
+
+%\paragraph{}Most of the studies that considered diagnosis of breast cancer in women that participate in screening used the Cox model [ref]. The main limitation of these studies relies on the lack of distinction among screen-detected and interval cancer 
+%[von Euler, Henderson2015]. Only a few studies considered if the breast cancer was screen-detected or interval cancer [Hofvind2006,
+%Blanch2014].
+% La majoria d'articles que estudien la detecci'o del càncer en els programes de cribratge
+% han utilitzat models de Cox [ref]. El major problema d'aquest articles és que estudien l'aparici'o
+% de càncer sense fer distincions del m`etode diagn`ostic (SCD o IC)[von Euler, Henderson]. Pocs han
+% estudiat l'efecte per separat [Hofvind2006, Blanch2014].
+%   - Cox CS:
+%     - von Euler JNCI
+%     - Blanch PlosOne2014
+%     - Hofvind 2006 (sobre THS)
+%     - Henderson CEBP 2015
+
+%\paragraph{}In the context of breast cancer screening, the discrete-time models were used to estimate the cumulative risk of having a FP result, the adherence of the participants to the screening program or the risk of being diagnosed of breast cancer. Ripping et al estimated the cumulative risk of a FP result, a screen-detected or an interval cancer. In addition, they obtained estimates according to presence/absence of family history of breast cancer.
+
+%Castells et al estimated the risk of screen-detected cancer after observing a FP result in a previous exam. They obtained an estimated OR = 1.81.
+% En el context del cribratge de CM, els models de temps discret s'han usat per estimar
+% el risc acumulat de tenir un FP, l'adherència de les participants o el risc de detectar un CM.
+% Tenim l'article de Ripping2016 on s'estima el risc acumulat de FP, de detectar un CM o de tenir un
+% IC. A m'es, separar per si tenen hist`oria familiar o no. Castells et al va estudiar l'efecte de
+% detectar un SCD en un cribratge successiu segons si tenia un FP previ (OR = 1.81). 
+%   - Discrete-time:
+%     - Ripping IJC 2016
+%     - Altres hubbard?
+
+% + Limitacions i fortaleses
+% + Conclusió final
+
+
+% There are different approaches in the literature on risk factors of breast cancer. Some authors
+% have used Cox models either pooling SD and IC, as in our two-state models, or considering that SD
+% and IC are different events and using a cause-specific approach (**** references CS: Blanch2014 i
+% Hofvind, S., Møller, B., Thoresen, S., and Ursin, G. (2006). Use of hormone therapy and risk of
+% breast cancer detected at screening and between mammographic screens. International Journal of
+% Cancer. Journal International Du Cancer, 118(12), 3112-7. http://doi.org/10.1002/ijc.21742 ****).
+% Other authors have used logistic regression models comparing IC with SD cancer\cite{Mandelson2000,Ciatto2004,Chiarelli2006,Lowery2011,Blanch2014},
+% multinomial models comparing SD, IC, and no cancer (usually the reference group is no cancer)
+% % !!! \cite{Blanch2014} No feiem això. No enrecordo cap que tingui aquest plantejament!!! or
+% discrete-time survival models estimating the cumulative incidence of SD and IC, separately\cite{Ripping2016}.
+% When using logistic regression models IC cancers are compared to SD tumors or both types of breast
+% cancer are compared to healthy controls. Breast density \cite{Mandelson2000,Ciatto2004,Chiarelli2006,Lowery2011},
+% hormone replacement therapy\cite{Chiarelli2006,Lowery2011}, and other risk factors\cite{Lowery2011}
+% are the variables of interest for assessing their association with IC.  
+% 
+% In general, the authors censor the competing event when estimating the cumulative incidence of one
+% of the two events.
+% 
+% investigated whether breast density increases interval cancer risk in a large sample of women with
+% interval and screen detected cancers. They used logistic regression to compare interval with screen
+% detected cancers and based their primary analyses on a 24-month screening interval, with a
+% sensitivity equal to 72\%. According to the authors, breast density is one of the strongest
+% predictors of the failure of mammographic screening to detect cancer. Ciatto et al. \cite{Ciatto2004}
+% did a similar study adding healthy controls and also used logistic regression to asses the
+% association of breast density and interval cancer.
+% 
+% 
+% Henderson, CEBP 2015 include only FP+TN in the study. They defined
+% FP:  mammograms with positive assessment and no cancer diagnosis within one year
+% TN: mammograms with a negative assessment and no cancer diagnosis within one year
+% TP: mammograms with positive assessment and cancer diagnosis within one year
+% FN: mammograms with a negative assessment and a cancer diagnosis within one year
+% 
+% They consider that cancers associated with TP and FN were assumed to have been present at the time of the screening
+% mammogram and their study focused on cancers diagnosed subsequent to the index screening examination. 
+% `'We used a partly conditional Cox proportional hazard survival model to assess the association between a false-positive mammography result (with additional imaging or with biopsy recommendation separately) and breast cancer. By using the partly conditional Cox model, we were able to include all mammograms received by an individual woman while accounting for within woman correlation. In these analyses, the mammogram was the unit of analysis. Each false-positive or true-negative mammogram initiated a new follow-up period, which continued until the first of breast cancer diagnosis or censoring by death, end of health plan enrollment (for women in the Western Washington state registry), 10 years of follow-up, or the end of the study period.''
+
+
+% \subsubsection{Strengths and limitations}
+% Afegir que hem usat un patró d'adherència molt sencill. Quan deixa de participar, no retorna.
+% Però en la pràctica 'real' succeix i hi poden haver dones que es saltin una participació o varies
+\paragraph{}As in most simulation studies, we imposed some restrictive assumptions and we studied
+only a limited range of scenarios. In particular, we limited to study one time-depend variable and
+affect only one transition. We assumed proportional transition intensities and that subject who
+were lost-to-follow-up don't have different risk of BC. Also, we imposed that a woman who missed
+one participation don't come back anymore, but in the real-life there are women coming after
+missing one participation. Moreover, we assumed that the visit times were independent of the
+process, because the visits are scheduled in advance independently of the BC. It is possible that
+some breast cancers diagnosed in women that participate in population screening as in the INCA
+study are detectable but missed at screening (false negative) and therefore are misclassified as
+interval cancers.
+
+
+% **** Discuss if we change the assumption on sojourn time in $S_p$ if there is a FP result ****.
+
+
+
+% \paragraph{Other issues to discuss}
+% \begin{enumerate}
+% \item Are FP results affecting transition to pre-clinical, sojourn time, stage at clinical
+%       detection?
+% \item Sojourn time in the pre-clinical state, maybe other distributions (i.e. log-normal) could be
+%       assumed. Or, only commented in the discussion.\newline
+%       Només a la discussio
+% \item Do we introduce diagnostic errors? (sensitivity lower that 100\%, overdiagnosis,...)\newline
+%       Hem posat la sensibilitat al 85\%.
+% \item Other risk factors (family history, number of live births, menstruation length, other types
+%       of breast disease). Also can be commented in the discussion.\newline
+%       No ho comentari, ja que no esta en els nostres objectius.
+% \item Deaths to causes other than breast cancer. Same.\newline
+%       No ho hem tingut en compte
+% \item Any distinction between in situ and invasive? In the Canadians study they used only invasive
+%       breast cancer.\newline
+%       No hem fet diferenciacio. Hauriem de fer un model mes complicat de 5 estats, no?
+% \item The Canadians have estimated a mean sojourn time of 3 years for women 50-59. Sensitivity of
+%       mammogram was 0.75 for 50-59 yrs.\newline
+%       Hem centraria només amb la part de l'efecte del FP, ja que l'objectiu es estudiar l'efecte
+%       del FP.
+% \item The Canadians use age at entry as a covariate. They justify it in order to take into account
+%       how variations in age within age groups affect the transition rates.\newline
+%       Si podem l'edat com a covariable, estem suposant que l'inici del cribratge modifica el risc
+%       de CM, cosa que no es certa. Per aixo, es millor utilitzar l'edat com a temps de seguiment.
+% \end{enumerate}
+
+
+\subsection{Conclusions}
+% Pensar.
+This paper suggests that MSM is the best model to estimate the breast cancer progression in the
+screening context. To study cancer progression, we do not encourage the use of discrete-time model,
+because the time is not related with the progression of BC. Also, we suggest the MSM over
+cause-specific Cox, because the SCD and IC are the same diseases in different stage.
+
+Simulation studies based on the real-life scenarios are useful to studies different approaches in
+controled environment. So, when we apply the methods in real-scenario, we have tools to interpret
+the results and the possible bias.

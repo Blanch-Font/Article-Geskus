@@ -1,0 +1,273 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{fancyref}
+\usepackage{graphicx}
+\graphicspath{ {/home/jordi/Dropbox/INCA/articulo competing risks} }
+\author{Jordi Blanch and Montse Ru\'e}
+\title{?}
+
+
+\begin{document}
+\section{Introduction}
+Intro sobre screening
+
+Intro sobre models de simulació i screening
+
+Canvi de mentalitat respecte l'anterior "paper".
+
+Objectiu principal: estimació del risc de tenir càncer via MSM o Cox. Quin és millor? Quines hipòtesis i condicions s'han de satisfer? Què passa quan no es compleixen? 
+Objectiu secundari: Efecte de l'allargament del follow-up ens els càncers detectats entre dues proves, com si fossin de cribratge en la següent prova.
+
+Estructura: estarà separat en: mètodes, resultats, discussió i conclusions.
+
+\section{Motivating data: the INterval CAncer (INCA) study}
+The aim of the INCA study was to assess the determinants of interval breast cancer in women
+attending early detection programs in Spain[Domingo and Blanch]. Interval cancers are symptomatic
+cancers that appear between two screening exams or during a period after the last screening exam.
+The INCA study also compared the characteristics and factors associated with screen-detected and
+interval breast cancers. We selected a subset of the INCA dataset, corresponding to 4 radiology 
+units of the Catalonia region, the INCA-CAT dataset. 
+
+\paragraph{}Population-based breast cancer screening in Catalonia is offered biennially to all
+women aged 50-69 years. Screening mammography has three possible outcomes: 1) negative result
+(normal), 2) positive result (abnormal findings requiring further assessments), and 3) early recall
+(an intermediate mammogram is performed out of sequence with the screening interval, at 6 or 12
+months). Cancers detected at intermediate mammogram were considered screen-detected cancers[Perry].
+
+\paragraph{}A positive result is considered to be a screen-detected tumour if, after further
+assessments, there is histopathological confirmation of cancer. Otherwise, the result is considered
+false-positive and the woman is invited again after two years. Further assessments can include
+non-invasive procedures (magnetic resonance imaging, ultrasonography, additional mammography) and/or
+invasive (fine-needle aspiration cytology, core-needle biopsy and open biopsy). 
+
+\paragraph{}Interval cancer was defined as ``a primary breast cancer arising after a negative
+screening episode and before the next invitation to screening or within 24 months for women who
+reached the upper age limit"[Perry]. We extended the definition until the 30th month, because we
+allowed a 6 month margin for women to attend each round. Interval cancers were identified by
+merging data from the registers of screening programmes with population-based cancer registries
+[Navarro], the regional Minimum Data Set (based on hospital discharges with information on the main
+diagnosis) and hospital-based cancer registries.
+
+\paragraph{}The INCA-CAT dataset consists of a retrospective cohort of 96,636 women who underwent
+mammography exams between January 1, 2000 and December 31, 2006, and were followed-up until June
+30, 2009 for interval cancer assessment. These women underwent a total of 230,742 screening
+mammograms. During the study period, 963 cancers were detected in routine screening mammograms, of
+which 671 were detected in successive participations, and 313 emerged as interval cancers. Both
+invasive and \textit{in situ} breast cancer carcinomas are included. 
+
+\paragraph{Data features}To analysis the INCA-CAT dataset, we assume that
+\begin{itemize}
+\item Right censoring of clinical stage: All woman will have a clinical breast cancer.
+\item Interval censoring of pre-clinical stage: The time to enter in the pre-clinical stage occurs
+between to participations.
+\item Left truncation: All woman are invited to participate from 50 years, but not all come in
+their first invitation or they started the screening before the beginning of the study.
+\item Informative censoring of the sojourn time: Women with SDC was treated and the time between
+pre-clinical to clinical cancer is not observed. It is a problem, because women with a short
+sojourn time are more likely to have an IC and women with a sojourn time longer than 2 years will
+always be censored.
+\end{itemize}
+
+\section{Methods}
+% Especificar com respondrem els dos objectius
+% 
+% Objectiu principal:
+%   - Mètodes: MSM i Cox
+%   - Manera: 5 simulacions realitzades
+%   - Anàlisi de sensibilitat: amagar informació per reproduir més bé la realitat.
+% Objectiu secundari:
+%   - Allargem el temps de seguiment fins als 2.5 (o 2) anys per estudiar l'efecte sobre el hazard
+%     risc.
+Per respondre l'objectiu principal crearem 5 simulacions amb 3 estats amb diferents caracterísiques.
+En cada simulació, estimarem un model de Cox i un MSM. Per simular millor la realitat,
+aleatoriament amagarem informació de l'entrada a pre-clínic o clínic. Per a l'objectiu secundari,
+utilitzarem les mateixes simulacons però simplificarem el model a 2 estats i estudiarem l'efecte de
+detectar els IC en el moment que succeixen o a la següent mamografia.
+
+% Mètodes:
+%   + MSM: explicació resumida
+%   + Cox: explicació resumida
+\subsection{Markov multi-state models for panel data}
+In this subsection, we summarize the main features of Markov multi-state models (MSM). For a better
+explanation, jackson2010.
+
+An MSM model suppose that each individe moves inside of a serie of finite states in continuous
+time. An example is the progression of disease, where each individe can progress or recover between
+adjacent states or can die (Figure \ref{fig_msm}).
+
+\begin{figure}
+
+\caption{General model for disease progression.}
+\label{fig_msm} 
+\end{figure}
+
+El moviment entre els estats $r$ i $s$ està definit per ''transition intensities'',
+$q_{rs}(t, z(t))$ on $r,s = 1,..., R$. Aquest poden dependre del temps o de les co-variables de
+l'individu. La transició entre $(r,s)$ es pot definir com
+\[q_{rs}(t, z(t)) = \frac{lim P(S(t + \delta t) = s|S(t) = r)}{\delta t}.\]
+Totes les transicions formen la matriu de transicions $Q$ (dimensió $R\times R$) on cada fila suma 0.
+
+% A multi-state model describes how an individual moves between a series of states in continuous
+% time. Suppose an individual is in state S(t) at time t. The movement on the discrete state
+% space 1, . . . , R is governed by transition intensities q rs (t, z(t)) : r, s = 1, . . . , R.
+% These may depend on time t, or, more generally, also on a set of individual-level or
+% time-dependent explanatory variables z(t). The intensity represents the instantaneous risk of
+% moving from state r to state s 6 = r:
+% The q rs form a R×R matrix Q whose rows sum to zero.
+
+This article focuses on multi-state models for panel data, in which the state S i (t) is only
+known at a finite series of times t = (t i1 , . . . , t in i ). Fitting multi-state models to panel data
+generally relies on the Markov assumption, that future evolution only depends on the current
+state. That is, q rs (t, z(t), F t ) is independent of F t , the observation history F t of the process
+up to the time preceding t. See, for example, Cox and Miller (1965) for a thorough review of
+continuous-time Markov chain theory. In a time-homogeneous Markov model, in which the
+q rs are also independent of t, the sojourn time in each state r is exponentially-distributed
+with mean −1/q rr . The probability that an individual in state r moves next to state s is
+−q rs /q rr .
+
+The Markov model for panel data was first described by Kalbfleisch and Lawless (1985)
+and Kay (1986). The likelihood for this basic model, used in msm, is calculated from the
+transition probability matrix P (u, t + u). The (r, s) entry of P (u, t + u), p rs (u, t + u), is the
+probability of being in state s at a time t + u, given the state at time u is r. P (u, t + u) is
+calculated in terms of Q using the Kolmogorov differential equations (Cox and Miller 1965).
+If the transition intensity matrix Q is constant over the interval (u, t + u), as in a time-
+homogeneous process, then P (u, t + u) = P (t) and the equations are solved by the matrix
+exponential of Q scaled by the time interval,
+P (t) = Exp(tQ).
+
+The full likelihood is then the product of probabilities of transition between observed states,
+over all individuals i and observation times j:
+L(Q) =
+Y
+i
+L i =
+Y
+i,j
+L i,j =
+Y
+p S(t ij )S(t i,j+1 ) (t i,j+1 − t ij ).
+(1)
+i,j
+Each component L i,j is the entry of the transition matrix P (t) at the S(t ij )th row and
+S(t i,j+1 )th column, evaluated at t = t i,j+1 − t ij . The likelihood L(Q) is maximized in terms
+of log(q rs ) to compute the estimates of q rs , using standard optimization algorithms, as im-
+plemented in the optim function in R. Standard errors are computed from the Hessian at the
+optimum. Some of these optimization algorithms make u
+
+\paragraph{}
+
+\subsection{Proportional hazard model}
+
+\paragraph{}
+
+% Les simulacions suposen una distribució de Weibull per l'entrada a pre-clínic on l'efecte del FP
+% és diferent
+%   + 1) no té efecte sobre l'entrada a pre-clínic
+%   + 2) FP constant al llarg dels cribratge
+%   + 3) FP com a funció step
+%   + 4) 3 + amb censores independents
+%   + 5) 3 + censures depenen del FP.
+% 
+% Simulació de la història natural d'una dona amb CM.
+%   + Com? Simulació en tres estats: sa -> pre-clínic -> clínic (posa dibuix)
+%   + Quantes? 15.000 dones sanes
+%   + Simulacions: 1.000 per cada combinació
+%   + Entrada:
+%     * Sense entrada retardada: totes entren amb 50 anys (t0=0)
+%     * Amb entrada retardada: l'entrada seguirà una U(0,15)
+%   + Seguiment màxim de 8 anys: 4 participacions més el temps fins a la següent mamografia.
+%   + Sortida:
+%     * Censura administrativa als 8 anys.
+%     * 71.5 anys.
+%     * Té un càncer pre-clínic o clínic.
+%     * Censura aleatoria: varis escenaris.
+% 
+% Simualció en 3 estats:
+%   + Per a simular les diferents distribucions seguim el ``paper'' de Bender et al.
+%   + Paràmetres dels models extrets de http://www.hindawi.com/journals/isrn/2013/750857/
+%   + Temps fins a pre-clínic:
+%     * Estudiem el temps fins pre-clínic des dels 50 anys.
+%     * Temps des de l'entrada a la cohort l'hem descartat.
+%     * ``Age is more relevant timescale, since it directly reflects the biological process''
+%     * El temps d'entrada a pre-clínic és una censura d'interval.
+%     * No coneixem el moment exacta. Sabem que succeix entre l'última prova negativa i la primera
+%       positiva.
+%     * Distibució de Weibull(scale = 0.002, shape = 0.82).
+%     * FP escenaris:
+%       1) No tenim FP: Weibull normal
+%       2) FP constant en totes les participacions: Formula ...
+%       3) FP funció step temps-depenent: Formula Bender
+%     * Censura aleatoria:
+%       - En els escenaris 1 i 2 no tenim censures aleatories.
+%       - En l'escenari 3 hem suposat que no tenim censures aleatories, censura aleatoria global i
+%         censura aleatoria depenen del FP (Parametres ``paper'' Roman et al.)
+%   + Temps de pre-clinic a clínic:
+%     * Estudiarem el sojourn time (temps des de pre-clínic a clínic).
+%     * Clock-reset approach (t0=0 (origen quan entra a pre-clínic)).
+%     * Suposem censura per la dreta.
+%     * ''When the sojourn time is the estimand, such data have been called doubly (interval)
+%       censored''
+%     * Suposem que el temps de sojourn segueix una distribució exponencial(lambda = 0.4).
+%     * Només té censura administrativa al cap de dos anys i mig.
+% 
+% En cada simulació ens centrarem en dos punts:
+%   + Entrada retardada o no:
+%     * Tothom entra als 50 anys
+%     * Entrada retardada seguint una U(0,15)
+%     * Podrem quantificar quin biaix hi ha entre la situació ideal i la real.
+%   + Càncers a pre-clínics tractats:
+%     * Les dones amb un càncer pre-clínic detectat se les tracta i no es pot observar l'entrada en clínic.
+%     * El temps de sojourn té censura informativa en les dones tractades.
+%     * Farem dos escenaris un on observem tota la història i l'altra com s'observa en els programes de cribratge.
+%     * Revisar literatura.
+% 
+% També estudiarem el temps fins a pre-clínic, reduint el model a dos estats:
+%   + Simulació: sa -> pre-clínic
+%   + Censura per la dreta.
+%   + Sortida: 
+%     * Censura administrativa als 8 anys.
+%     * 71.5 anys.
+%     * Té un càncer pre-clínic o clínic.
+%     * Censura aleatoria: varis escenaris.
+%   + Dos escenaris en el cas dels clínics:
+%     * Quan detectem el càncer clínic, suposem que és el temps a pre-clínic.
+%     * Quan detectem el càncer clínic, allarguem el seguiment fins a la següent prova.
+
+\section{Results}
+\subsection{Simulation studies}
+Explicar els resultats
+
+Per cada simulació hem variat els següents paràmetres:
+  + HR(FP) = 1.5, 2 i 4
+  + Parametre de l'exponencial del sojourn time: 0.2, 0.4, 0.8
+  + Paràmetres de la Weibull:
+    * Shape: 0.60, 0.82, 0.90
+    * Scale: 0.03, 0.5, 1
+
+\subsubsection{Simulació dels 3 estats}
+\subsubsection{Simulació dels 2 estats}
+
+
+
+\subsection{Aplication in INCA-CAT}
+
+\section{Discussion}
+  + Simulacions:
+    * Biaix entre observat i real
+    * Biaix quan tenim entrades retardades
+    * Biaix en el model de 2 estats (allargament dels CI fins al següent examen)
+    * Què passa quan modifiquem els paràmetres
+  + Aplicació a l'INCA:
+    * Quins problemes té l'INCA
+    * Segons la simulació, quin biaix tenim respecte si ho observéssim tot.
+
+  + Fortaleses i limitacions
+
+\section{Conclusion}
+
+\section{References}
+
+\end{document}

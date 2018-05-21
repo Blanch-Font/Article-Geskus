@@ -1,0 +1,179 @@
+\section{Tables}
+
+\begin{table}[h!]
+\footnotesize
+\centering
+\begin{threeparttable}
+\begin{tabular}{l|c|c|c|c|c|c}
+\toprule
+\textbf{Method} & \textbf{HR} & \textbf{Parameter} &\multicolumn{4}{c}{\textbf{Performance}\tnote{a,b}} \\ \cline{4-7}
+& & & \textbf{Bias} & \textbf{Percentage} & \textbf{Accuracy}  &  \textbf{Coverage}  \\
+& & & & \textbf{Bias} &   \textbf{MSE}\\
+\midrule
+\multirow{2}{*}{\parbox{0.2\textwidth}{MS3, no LE}} & 2 & HR$_{S_0 \rightarrow S_p}$ &0.0043&	0.22& 0.0104	& 97.20\\
+& 1 & HR$_{S_p \rightarrow S_c}$ & 0.0010	& 0.10	& 0.0042	&95.80\\
+\cmidrule{1-7}
+\multirow{2}{*}{\parbox{0.2\textwidth}{MS3, LE}} & 2 & HR$_{S_0 \rightarrow S_p}$ &0.0050&	0.25	&0.0118&	94.80\\
+& 1 & HR$_{S_p \rightarrow S_c}$ & 0.0049&	0.49&	0.0046 & 95.60\\
+\midrule
+\multirow{2}{*}{\parbox{0.2\textwidth}{Cox CS, no LE}} & \multirow{2}{*}{2} & HR$_{S_0 \rightarrow S_p}$ &-0.0203&-1.01&0.0136&	97.20\\
+&& HR$_{S_0 \rightarrow S_c}$ &-0.0539&-2.69&0.0173&95.00\\
+\cmidrule{1-7}
+\multirow{2}{*}{\parbox{0.2\textwidth}{Cox CS, LE}} & \multirow{2}{*}{2} & HR$_{S_0 \rightarrow S_p}$ &-0.0212&-1.06&	0.0154&	95.40\\
+&& HR$_{S_0 \rightarrow S_c}$ & -0.0493&-2.47&0.0179&93.40\\
+\midrule
+\multirow{2}{*}{\parbox{0.2\textwidth}{DT3, no LE}} & \multirow{2}{*}{2} & HR$_{S_0 \rightarrow S_p}$ &-0.0431&	-2.16&	0.0176&	77.60\\
+&& HR$_{S_0 \rightarrow S_c}$ &0.0824&	4.12	&0.0239 & 91.60\\
+\cmidrule{1-7}
+\multirow{2}{*}{\parbox{0.2\textwidth}{DT3, LE}} & \multirow{2}{*}{2} & HR$_{S_0 \rightarrow S_p}$ &-0.0495&	-2.48&	0.0198&	74.80\\
+&& HR$_{S_0 \rightarrow S_c}$ &0.1063& 5.18&0.0282&	88.80\\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}\scriptsize
+	\item HR: hazard ratio of a false positive result, MS3: multistate models with three states, LE: late entry, CS: cause-specific, DT: discrete time event.
+	\item[a] Bias=$\delta=\overline{\hat\beta}-\beta$; Percentage bias=$\left(\frac{\overline{\hat\beta}-\beta}{\beta}*100 \right)$; Accuracy or mean square error (MSE): $(\overline{\hat\beta}-\beta)^2+(\mbox{SE}(\hat \beta))^2$; 	 Coverage:..... 
+	\item[b] Assumptions:.....
+\end{tablenotes}
+\end{threeparttable}
+\caption{Simulation results for the complete data. Three state models.}
+\label{tab:HRFP_complete}
+\end{table}
+
+%\newpage
+
+
+\begin{table}[h!]
+\footnotesize
+\centering
+\begin{threeparttable}
+\begin{tabular}{l|c|c|c|c|c|c}
+\toprule
+\textbf{Method} &   \textbf{HR} & \textbf{Parameter} &\multicolumn{4}{c}{\textbf{Performance}\tnote{a,b}} \\ \cline{4-7}
+& & & \textbf{Bias} & \textbf{Percentage} & \textbf{Accuracy}  &  \textbf{Coverage}  \\
+& & & & \textbf{Bias} &   \textbf{MSE}\\
+\midrule
+\multirow{2}{*}{\parbox{0.2\textwidth}{MS3, no LE}} & 2 & HR$_{S_0 \rightarrow S_p}$ &0.0072&0.36&0.0106&	97.40\\
+&1 & HR$_{S_p \rightarrow S_c}$& 0.0186	&1.86&0.0150&	94.80\\
+\cmidrule{1-7}
+\multirow{2}{*}{\parbox{0.2\textwidth}{MS3, LE}} & 2 & HR$_{S_0 \rightarrow S_p}$ &0.0075 &0.37&0.0123&	94.40\\
+& 1 & HR$_{S_p \rightarrow S_c}$ &0.0242&2.42	&0.0153	&94.00\\
+\midrule
+\multirow{2}{*}{\parbox{0.2\textwidth}{Cox CS, no LE}} & \multirow{2}{*}{2} & HR$_{S_0 \rightarrow S_p}$ &-0.0197 &	-0.98&0.0149& 96.00\\
+&& HR$_{S_0 \rightarrow S_c}$ & -0.0233&	-1.51 &0.0479	& 95.80\\
+\cmidrule{1-7}
+\multirow{2}{*}{\parbox{0.2\textwidth}{Cox CS, LE}} & \multirow{2}{*}{2} & HR$_{S_0 \rightarrow S_p}$ &-0.0211 &-1.06 &	0.0174 &	95.00\\
+&& HR$_{S_0 \rightarrow S_c}$ &-0.0152	&-0.76	&0.0477&95.60\\
+\midrule
+\multirow{2}{*}{\parbox{0.2\textwidth}{DT3, no LE}} & \multirow{2}{*}{2} & HR$_{S_0 \rightarrow S_p}$ & 0.0073	&0.36	&0.0136&	96.80\\
+&& HR$_{S_0 \rightarrow S_c}$ &0.1899	&9.49	&0.0974	&87.20\\
+\cmidrule{1-7}
+\multirow{2}{*}{\parbox{0.2\textwidth}{DT3, LE}} & \multirow{2}{*}{2} & HR$_{S_0 \rightarrow S_p}$ &0.0035&	0.17	&0.0142&	93.60\\
+&& HR$_{S_0 \rightarrow S_c}$ &0.2282&	11.41&	0.1119&	94.80\\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}\scriptsize
+	\item HR: hazard ratio of a false positive result, MS3: multistate models with 3 states, LE: late entry, CS: cause-specific, DT: discrete time event.
+	\item[a] Bias=$\delta=\overline{\hat\beta}-\beta$; Percentage bias=$\left(\frac{\overline{\hat\beta}-\beta}{\beta}*100 \right)$; Accuracy or mean square error (MSE): $(\overline{\hat\beta}-\beta)^2+(\mbox{SE}(\hat \beta))^2$; 	 Coverage:..... 
+	\item[b] Assumptions: .....
+\end{tablenotes}
+\end{threeparttable}
+\caption{Simulation results for the observed data. Three state models.}
+\label{tab:HRFP_observed3}
+\end{table}
+
+
+
+\begin{table}[h!]
+\footnotesize
+\centering
+\begin{threeparttable}
+\begin{tabular}{l|c|c|c|c|c}
+\toprule
+\textbf{Method} & \textbf{Parameter} &\multicolumn{4}{c}{\textbf{Performance}\tnote{a,b}} \\ \cline{3-6}
+&   \textbf{HR$_{S_0 \rightarrow S_c}$} & \textbf{Bias} & \textbf{Percentage} & \textbf{Accuracy}  &  \textbf{Coverage}  \\
+& & & \textbf{Bias} &   \textbf{MSE}\\
+\midrule
+MS2 exact time, no LE&   & 0.0070&0.35&0.0106	&97.40\\
+\cmidrule{1-6}
+MS2 exact time, LE&  &0.073&	0.36&	0.0132&	94.40\\
+\cmidrule{1-6}
+MS2 next screen, no LE & & 0.0064&	0.32	&0.0106&97.40\\
+\cmidrule{1-6}
+MS2 next screen, LE&  &0.0066 &0.33 &0.0122&	94.40\\
+\midrule
+Cox exact time, no LE&  &-0.0225&	-1.13&	0.0106&	96.80\\
+\cmidrule{1-6}
+Cox exact time, LE&  & -0.0216&	-1.08&	0.0122&	95.60\\
+\cmidrule{1-6}
+Cox next screen, no LE&  &-0.0225&	-1.13&	0.0106&	96.60\\
+\cmidrule{1-6}
+Cox next screen, LE&  &-0.0216&	-1.08&	0.0122&	95.60\\
+\midrule
+DT2 exact time, no LE & &0.0497&	2.49&	0.0125	&94.80\\
+\cmidrule{1-6}
+DT2 exact time, LE&  &0.0565	&2.83 &	0.0147	&92.80\\
+\cmidrule{1-6}
+DT2 next screen, no LE&  &-0.0035 &-0.17 &0.0095 &97.60\\
+\cmidrule{1-6}
+DT2 next screen, LE& & 0.0028	&0.14	&0.0109	&95.60\\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}\scriptsize
+	\item HR: hazard ratio of a false positive result, MS3: multistate models with 3 states, LE: late entry, CS: cause-specific, DT: discrete time event.
+	\item[a] Bias=$\delta=\overline{\hat\beta}-\beta$; Percentage bias=$\left(\frac{\overline{\hat\beta}-\beta}{\beta}*100 \right)$; Accuracy or mean square error (MSE): $(\overline{\hat\beta}-\beta)^2+(\mbox{SE}(\hat \beta))^2$; 	 Coverage:..... 
+	\item[b] Assumptions: HR=2 for the $S_0 \rightarrow S_c$ transition.
+\end{tablenotes}
+\end{threeparttable}
+\caption{Simulation results for the observed data. Two state models.}
+\label{tab:HRFP_observed2}
+\end{table}
+
+
+\clearpage
+
+\begin{table}[h!]
+\footnotesize
+\centering
+\begin{threeparttable}
+\begin{tabular}{l|c|c}
+\toprule
+\textbf{Model} & \textbf{Parameter} & HR (95\% CI)\\
+\midrule
+\multirow{2}{*}{MS3} & HR$_{S_0 \rightarrow S_p}$ & 1.7685 (1.2115 - 2.5818)\\ %1.5620 (1.0163 - 2.4007)\\
+&HR$_{S_p \rightarrow S_c}$ & 0.9997 (0.5192 - 1.9247)\\%0.6797 (0.3006 - 1.5367)\\
+\midrule
+\multirow{2}{*}{Cox, CS} & HR$_{S_0 \rightarrow S_p}$ & 1.7722 (1.3389 - 2.3457)\\%1.8500 (1.2920 - 2.6489)\\
+& HR$_{S_0 \rightarrow S_c}$ & 1.6152 (1.1207 - 2.3279)\\%0.9507 (0.4467 - 2.0234)\\
+\midrule
+\multirow{2}{*}{DT3, CS} & HR$_{S_0 \rightarrow S_p}$ & 1.9312 (1.3994 - 2.6120)\\% 1.9488 (1.3243 - 2.7760)\\
+& HR$_{S_0 \rightarrow S_c}$ & 1.2223 (0.6333 - 2.1519)\\%1.0742 (0.4499 - 2.1665)\\
+\bottomrule
+\end{tabular}
+\end{threeparttable}
+\caption{INCA study: Three state models}
+\label{tab:HR3INCA}
+\end{table}
+
+\begin{table}[h!]
+\footnotesize
+\centering
+\begin{threeparttable}
+\begin{tabular}{l|c}
+\toprule
+\textbf{Model} & HR$_{S_0 \rightarrow S_c}$  (95\% CI)\\
+\midrule
+MS2, exact time & 1.6811 (1.1526 - 2.4520)\\%1.4888 (0.9691 - 2.2872)\\
+MS2, next screen & 1.6472 (1.1296 - 2.4020)\\%1.4622 (0.9517 - 2.2466)\\
+\midrule
+Cox, exact time & 1.7051 (1.3643 - 2.1311)\\%1.5878 (1.1489 - 2.1943)\\
+Cox, next screen & 1.7099 (1.3696 - 2.1346)\\%1.5632 (1.1317 - 2.1593)\\
+\midrule
+DT2, exact time &  1.7353 (1.3045 - 2.2705)\\%1.7075  (1.2068 - 2.3505)\\
+DT2, next screen &  1.8230 (1.4202 - 2.3112)\\%1.3875 (0.9841 - 1.9018)\\
+\bottomrule
+\end{tabular}
+\end{threeparttable}
+\caption{INCA study: Two state models}
+\label{tab:HR2INCA}
+\end{table}
+

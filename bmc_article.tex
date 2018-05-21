@@ -1,0 +1,1148 @@
+%% BioMed_Central_Tex_Template_v1.06
+%%                                      %
+%  bmc_article.tex            ver: 1.06 %
+%                                       %
+
+%%IMPORTANT: do not delete the first line of this template
+%%It must be present to enable the BMC Submission system to
+%%recognise this template!!
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                     %%
+%%  LaTeX template for BioMed Central  %%
+%%     journal article submissions     %%
+%%                                     %%
+%%          <8 June 2012>              %%
+%%                                     %%
+%%                                     %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                                                 %%
+%% For instructions on how to fill out this Tex template           %%
+%% document please refer to Readme.html and the instructions for   %%
+%% authors page on the biomed central website                      %%
+%% http://www.biomedcentral.com/info/authors/                      %%
+%%                                                                 %%
+%% Please do not use \input{...} to include other tex files.       %%
+%% Submit your LaTeX manuscript as one .tex document.              %%
+%%                                                                 %%
+%% All additional figures and files should be attached             %%
+%% separately and not embedded in the \TeX\ document itself.       %%
+%%                                                                 %%
+%% BioMed Central currently use the MikTex distribution of         %%
+%% TeX for Windows) of TeX and LaTeX.  This is available from      %%
+%% http://www.miktex.org                                           %%
+%%                                                                 %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% additional documentclass options:
+%  [doublespacing]
+%  [linenumbers]   - put the line numbers on margins
+
+%%% loading packages, author definitions
+
+%\documentclass[twocolumn]{bmcart}% uncomment this for twocolumn layout and comment line below
+\documentclass{bmcart}
+
+%%% Load packages
+%\usepackage{amsthm,amsmath}
+%\RequirePackage{natbib}
+%\RequirePackage[authoryear]{natbib}% uncomment this for author-year bibliography
+%\RequirePackage{hyperref}
+\usepackage[utf8]{inputenc} %unicode support
+%\usepackage[applemac]{inputenc} %applemac support if unicode package fails
+%\usepackage[latin1]{inputenc} %UNIX support if unicode package fails
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{fancyref}
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage[all]{xy}
+\usepackage{cite}
+\usepackage{url}
+\usepackage{geometry}
+\usepackage{pdflscape}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{threeparttablex}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                             %%
+%%  If you wish to display your graphics for   %%
+%%  your own use using includegraphic or       %%
+%%  includegraphics, then comment out the      %%
+%%  following two lines of code.               %%
+%%  NB: These line *must* be included when     %%
+%%  submitting to BMC.                         %%
+%%  All figure files must be submitted as      %%
+%%  separate graphics through the BMC          %%
+%%  submission process, not included in the    %%
+%%  submitted article.                         %%
+%%                                             %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\def\includegraphic{}
+\def\includegraphics{}
+
+
+
+%%% Put your definitions there:
+\startlocaldefs
+\endlocaldefs
+
+
+%%% Begin ...
+\begin{document}
+
+%%% Start of article front matter
+\begin{frontmatter}
+
+\begin{fmbox}
+\dochead{Research}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                          %%
+%% Enter the title of your article here     %%
+%%                                          %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Multi-state versus semi-parametric Cox and discrete-time models for assessing the effect of
+       false-positive results of mammogram on breast cancer risk}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                          %%
+%% Enter the authors here                   %%
+%%                                          %%
+%% Specify information, if available,       %%
+%% in the form:                             %%
+%%   <key>={<id1>,<id2>}                    %%
+%%   <key>=                                 %%
+%% Comment or delete the keys which are     %%
+%% not used. Repeat \author command as much %%
+%% as required.                             %%
+%%                                          %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\author[
+   addressref={aff1,aff2},                   % id's of addresses, e.g. {aff1,aff2}
+%   corref={aff1},                       % id of corresponding address, if any
+%   noteref={n1},                        % id's of article notes, if any
+   email={jblanchifont@gmail.com}   % email address
+]{\inits{J}\fnm{Jordi} \snm{Blanch}}
+\author[
+   addressref={aff3, aff4,aff5},
+   email={geskus.work@inter.nl.net}
+]{\inits{RB}\fnm{Ronald B} \snm{Geskus}}
+\author[
+   addressref={aff1, aff6, aff7},
+   email={mariasalaserra@parcdesalutmar.cat}
+]{\inits{M}\fnm{Maria} \snm{Sala}}
+\author[
+   addressref={aff1, aff6, aff7},
+   email={xaviercastells@parcdesalutmar.cat}
+]{\inits{X}\fnm{Xavier} \snm{Castells}}
+\author[
+   addressref={aff8},
+   corref={aff8},                       % id of corresponding address, if any
+   email={montse.rue@cmb.udl.cat}
+]{\inits{M}\fnm{Montserrat} \snm{Rué}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                          %%
+%% Enter the authors' addresses here        %%
+%%                                          %%
+%% Repeat \address commands as much as      %%
+%% required.                                %%
+%%                                          %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\address[id=aff1]{%                           % unique id
+  \orgname{IMIM (Hospital del Mar Medical Research Institute)}, % university, etc
+  %\street{PRBB},                     %
+  %\postcode{}                                % post or zip code
+  \city{Barcelona},                              % city
+  \cny{Spain}                                    % country
+}
+\address[id=aff2]{%
+  \orgname{Vascular Health Research Group (ISV-Girona).  Institut Universitari d’Investigació en
+  Atenció Primària Jordi Gol (IDIAP Jordi Gol)},
+  %\street{?},
+  \city{Barcelona},
+  \cny{Spain}
+}
+\address[id=aff3]{%                           % unique id
+  \orgname{Amsterdam Public Health Research Institute, Academic Medical Centre, University of Amsterdam}, % university, etc
+  %\street{?},                     %
+  %\postcode{}                                % post or zip code
+  \city{Amsterdam},                              % city
+  \cny{The Netherlands}                                    % country
+}
+
+\address[id=aff4]{%                           % unique id
+  \orgname{Nuffield Department of Medicine, University of Oxford},  % university, etc
+  %\street{?},                     %
+  %\postcode{}                                % post or zip code
+  \city{Oxford},                              % city
+  \cny{UK}                                    % country
+}
+
+\address[id=aff5]{%                           % unique id
+  \orgname{Oxford University Clinical Research Unit, Wellcome Trust Major Overseas Programme}, % university, etc
+  %\street{?},                     %
+  %\postcode{}                                % post or zip code
+  \city{Ho Chi Minh City},                              % city
+  \cny{Vietnam}                                    % country
+}
+
+\address[id=aff6]{%                           % unique id
+  \orgname{Health Services Research on Chronic Patients Network (REDISSEC)}, % university, etc
+  %\street{PRBB},                     %
+  %\postcode{}                                % post or zip code
+  \city{Madrid},                              % city
+  \cny{Spain}                                    % country
+}
+\address[id=aff7]{%                           % unique id
+  \orgname{Epidemiology and Evaluation Department, Hospital del Mar}, % university, etc
+  %\street{PRBB},                     %
+  %\postcode{}                                % post or zip code
+  \city{Barcelona},                              % city
+  \cny{Spain}                                    % country
+}
+
+\address[id=aff8]{%
+  \orgname{Lleida University-Lleida Biomedical Research Institute (IRBLleida)},
+  \street{Avda. Rovira Roure 50},
+  \city{Lleida},
+  \cny{Spain}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                          %%
+%% Enter short notes here                   %%
+%%                                          %%
+%% Short notes will be after addresses      %%
+%% on first page.                           %%
+%%                                          %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{artnotes}
+%\note{Sample of title note}     % note to the article
+%\note[id=n1]{Equal contributor} % note, connected to author
+\end{artnotes}
+
+\end{fmbox}% comment this for two column layout
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                          %%
+%% The Abstract begins here                 %%
+%%                                          %%
+%% Please refer to the Instructions for     %%
+%% authors on http://www.biomedcentral.com  %%
+%% and include the section headings         %%
+%% accordingly for your article type.       %%
+%%                                          %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{abstractbox}
+
+\begin{abstract} % abstract
+
+\parttitle{Introduction}
+Screening for breast cancer may lead to interventions in asymptomatic women, resulting in partially and selective data on the natural disease course. This study aims to estimate the biases induced by screening when assessing the effect of a false positive result (FP) and to compare the effect estimates obtained with three different modelling approaches.
+
+\parttitle{Methods}
+The study data consists of a retrospective cohort of women who underwent mammography exams (INCA-CAT study). We assumed a three states model $S_0 \rightarrow S_p \rightarrow S_c$ (absence of disease, pre-clinical, clinical) where the transition $S_0 \rightarrow S_p$ is interval-censored and $S_p \rightarrow S_c$ is either observed exactly or right-censored. We used multi-state, Cox, and discrete-time models. In addition, we conducted a simulation study aimed to explore the models performance. We were interested in assessing two sources of bias: the one that arises from the models assumptions and the one that originates when the models are applied to data partially observed. Summary measures of performance were absolute and relative bias, mean square error, and coverage of confidence intervals.
+
+\parttitle{Results}
+Simulations show that in the hypothetical scenario of complete data the three-state model performs very well for estimating the HR of FP for both transitions. The Cox model has also good properties for the $S_0 \rightarrow S_p$ transition but slightly underestimates the true HR for the $S_0 \rightarrow S_c$ transition. Discrete time models do not perform as well as the other, with coverage of the HR intervals for the $S_0 \rightarrow S_p$ transition lower than 80\%. When the models were applied to the INCA study, the multi-state and Cox models provided similar estimates for the HR on the $S_0 \rightarrow S_p$ transition ($HR \simeq 1.77$).  When considering only two states, with no distinction between $S_p$ and $S_c$ all the three models provided similar results, with HRs varying from $1.68$ to $1.73$.
+
+\parttitle{Conclusion}
+Our work suggests that multi-state models are the most appropriate for estimating breast cancer progression within the screening context. The simulation study showed that the Cox or discrete-time models have provided similar results to the multi-state models.
+
+\end{abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                          %%
+%% The keywords begin here                  %%
+%%                                          %%
+%% Put each keyword in separate \kwd{}.     %%
+%%                                          %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{keyword}
+\kwd{Multi-state models}
+\kwd{Cox models}
+\kwd{Discrete-time models}
+\kwd{Simulation}
+\kwd{Bresat cancer}
+\end{keyword}
+
+% MSC classifications codes, if any
+%\begin{keyword}[class=AMS]
+%\kwd[Primary ]{}
+%\kwd{}
+%\kwd[; secondary ]{}
+%\end{keyword}
+
+\end{abstractbox}
+%
+%\end{fmbox}% uncomment this for twcolumn layout
+
+\end{frontmatter}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                          %%
+%% The Main Body begins here                %%
+%%                                          %%
+%% Please refer to the instructions for     %%
+%% authors on:                              %%
+%% http://www.biomedcentral.com/info/authors%%
+%% and include the section headings         %%
+%% accordingly for your article type.       %%
+%%                                          %%
+%% See the Results and Discussion section   %%
+%% for details on how to create sub-sections%%
+%%                                          %%
+%% use \cite{...} to cite references        %%
+%%  \cite{koon} and                         %%
+%%  \cite{oreg,khar,zvai,xjon,schn,pond}    %%
+%%  \nocite{smith,marg,hunn,advi,koha,mouse}%%
+%%                                          %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%% start of article main body
+% <put your article body there>
+
+%%%%%%%%%%%%%%%%
+%% Background %%
+%%
+% \section*{Content}
+% Text and results for this section, as per the individual journal's instructions for authors. %\cite{koon,oreg,khar,zvai,xjon,schn,pond,smith,marg,hunn,advi,koha,mouse}
+% 
+% \section*{Section title}
+% Text for this section \ldots
+% \subsection*{Sub-heading for section}
+% Text for this sub-heading \ldots
+% \subsubsection*{Sub-sub heading for section}
+% Text for this sub-sub-heading \ldots
+% \paragraph*{Sub-sub-sub heading for section}
+% Text for this sub-sub-sub-heading \ldots
+% In this section we examine the growth rate of the mean of $Z_0$, $Z_1$ and $Z_2$. In
+% addition, we examine a common modeling assumption and note the
+% importance of considering the tails of the extinction time $T_x$ in
+% studies of escape dynamics.
+% We will first consider the expected resistant population at $vT_x$ for
+% some $v>0$, (and temporarily assume $\alpha=0$)
+% %
+% \[
+%  E \bigl[Z_1(vT_x) \bigr]= E
+% \biggl[\mu T_x\int_0^{v\wedge
+% 1}Z_0(uT_x)
+% \exp \bigl(\lambda_1T_x(v-u) \bigr)\,du \biggr].
+% \]
+% %
+% If we assume that sensitive cells follow a deterministic decay
+% $Z_0(t)=xe^{\lambda_0 t}$ and approximate their extinction time as
+% $T_x\approx-\frac{1}{\lambda_0}\log x$, then we can heuristically
+% estimate the expected value as
+% %
+% \begin{eqnarray}\label{eqexpmuts}
+% E\bigl[Z_1(vT_x)\bigr] &=& \frac{\mu}{r}\log x
+% \int_0^{v\wedge1}x^{1-u}x^{({\lambda_1}/{r})(v-u)}\,du
+% \nonumber\\
+% &=& \frac{\mu}{r}x^{1-{\lambda_1}/{\lambda_0}v}\log x\int_0^{v\wedge
+% 1}x^{-u(1+{\lambda_1}/{r})}\,du
+% \nonumber\\
+% &=& \frac{\mu}{\lambda_1-\lambda_0}x^{1+{\lambda_1}/{r}v} \biggl(1-\exp \biggl[-(v\wedge1) \biggl(1+
+% \frac{\lambda_1}{r}\biggr)\log x \biggr] \biggr).
+% \end{eqnarray}
+% %
+% Thus we observe that this expected value is finite for all $v>0$ (also see \cite{koon,khar,zvai,xjon,marg}).
+% %\nocite{oreg,schn,pond,smith,marg,hunn,advi,koha,mouse}
+
+\section*{Introduction}
+The assessment of breast cancer screening programs traditionally has been based on indicators of
+performance, e.g. frequency of detected cancers, false-positive results, and interval cancers,
+obtained cross-sectionally at specific time periods (usually a screening round). Cross-sectional
+measures are limited, however, by the fact that they do not capture changes over time that may be
+associated to the risk of developing breast cancer. In contrast, longitudinal studies of women
+attending breast cancer screening may assess how past and current information on risk factors
+affect the risk of developing breast cancer.
+
+In research on breast cancer screening, longitudinal data methods were initially applied to
+estimate the cumulative rates of false-positive results \cite{Elmore1998, Castells2006,
+Hubbard2011, Roman2011b, Hofvind2012d}. Later on, longitudinal data analyses have been used to
+study 1) the frequency of screen-detected cancers over several rounds \cite{Hofvind2006,
+Blanch2013, Ripping2016}, 2) the effect of previous false-positive results on detection rate
+\cite{VonEuler-Chelpin2012, Castells2013b}, 3) the determinants of interval cancer
+\cite{Hofvind2006, Blanch2014}, and 4) the association between longitudinal breast density
+measurements and breast cancer risk \cite{Armero2016}. Interval cancers are symptomatic cancers
+that appear between two screening exams or during a period after the last screening exam.
+
+In a previous work, we studied the determinants of screen-detected cancer and interval cancer
+-symptomatic breast cancer that appears after negative tests and before the next invitation
+\cite{Blanch2014}. We analyzed screen-detected and interval cancers as distinct causes of failure,
+but, the fact breast cancer is detected in a screening exam precludes an interval cancer, and vice
+versa. Progression of breast cancer fits better in the multi-state models theory were individuals
+transition among different health states at variable rates that can be related to their
+characteristics. 
+
+Screening for breast cancer may lead to interventions in asymptomatic women, resulting in data on
+the natural disease course that are observed partially and selective. As a consequence, screening
+may cause several biases in the analysis of time to event data. In analysis of survival from
+diagnosis, the most known and studied biases are \textit{lead-time} and \textit{length} sampling.
+The lead-time is defined as the time gained by diagnosing the disease before the patient
+experiences symptoms. Even if early diagnosis and early treatment had no benefit, the survival of
+early detected cancer cases would be longer than the survival of clinical cases. Length sampling
+bias arises because screen-detected cancers are more likely to have slower growth than non-screen
+detected cancers \cite{Zelen1969}. In addition, when screen detected and symptomatic cancers are
+combined, screening may interfere in the assessment of risk factors of breast cancer due to 1)
+earlier time of detection for screen detected tumours; 2) the fact that symptomatically detected
+tumours have characteristics that are different from screen detected cancers \cite{Blanch2014}; and
+3) there is overdiagnosis of low growth tumours that never would become symptomatic during a woman
+lifetime \cite{Esserman2013a}. In summary, early detection of breast cancer introduces changes in
+the natural history of the disease that need to be considered when assessing the effect of
+interventions or the association of risk factors.
+
+Simulation models can be used to examine how screening interferes with the assessment of risk
+factors. Recently, Taghipour \textit{et al.} used a partially observable Markov model to estimate
+relevant parameters of breast cancer progression and early detection in the Canadian National
+Breast Screening Study \cite{Taghipour2013}. Previously, other authors had modeled the natural
+history of breast cancer, using analytic or simulation models that incorporated input data from the
+literature and made different assumptions \cite{Zelen1969, Chen1996, Shen2001, Lee2003b, Berry2006,
+Fryback2006, Hanin2006, Lee2006, Mandelblatt2006, Plevritis2006, Weedon-Fekjaer2008a}. The work of
+the Cancer Intervention and Surveillance Modeling network (CISNET) breast group \cite{Berry2006,
+Fryback2006, Hanin2006, Lee2006, Mandelblatt2006, Plevritis2006} reflects how modeling studies can
+provide evidence to complement the results of randomized controlled trials and observational
+studies.
+
+The objectives of this study are 1) To estimate the biases induced by the screening process when
+assessing the effect of a FP result in a mammogram test on the progression to
+pre-clinical cancer and clinical cancer; 2) To evaluate the effect estimates obtained via
+parametric multi-state models that take interval-censoring into account and semi-parametric Cox
+models or discrete-time models that don't.The paper is organized as follows. Section 2 presents the
+motivating study, the INCA-CAT,  which contains data on sequential screening mammograms in Catalan
+women. Section 3 is a methods section that defines concepts relevant to screening, describes the
+methods used to estimate the effect of false-positive results in previous mammographic exams on the
+hazard of being diagnosed of breast cancer, and also details how a simulation study was performed.
+Section 4 presents the results of the simulation study and their application to the INCA-CAT study.
+Section 5 contains the discussion and conclusions.
+
+\section*{Motivating data: the INterval CAncer (INCA) study}
+The aim of the INCA study was to assess the determinants of interval breast cancer in women
+attending early detection programs in Spain \cite{Domingo2014, Blanch2014}. The INCA study also
+compared the characteristics associated with screen-detected and interval breast cancers. We
+selected a subset of the INCA dataset, corresponding to four radiology units of the Catalonia
+region, the INCA-CAT dataset. 
+
+Population-based breast cancer screening in Catalonia is offered biennially to all women aged 50-69
+years. Screening mammography has three possible outcomes: 1) negative result (normal), 2) positive
+result (abnormal findings requiring further assessments), and 3) early recall (an intermediate
+mammogram is performed out of sequence with the screening interval, at 6 or 12 months). Cancers
+detected at an intermediate mammogram were considered screen-detected cancers \cite{Perry2008}.
+
+A positive result is considered to be a screen-detected tumour if, after further assessments, there
+is histopathological confirmation of cancer. Otherwise, the result is considered false-positive and
+the woman is invited again after two years. Further assessments can include non-invasive procedures
+(magnetic resonance imaging, ultrasonography, additional mammography) and/or invasive (fine-needle
+aspiration cytology, core-needle biopsy and open biopsy).
+
+Interval cancer was defined as ``a primary breast cancer arising after a negative screening episode
+and before the next invitation to screening or within 24 months for women who reached the upper age
+limit" \cite{Perry2008}. This definition was extended until the 30th month, to allow a 6 months
+margin for women to attend each round. Interval cancers were identified by merging the screening
+programmes databases with hospital discharge databases and population-based or hospital cancer
+registries. 
+
+The INCA-CAT dataset consists of a retrospective cohort of 96,636 women who underwent mammography
+exams between January 1, 2000 and December 31, 2006, and were followed-up until June 30, 2009 for
+interval cancer assessment. These women underwent a total of 230,742 screening mammograms. During
+the study period, 963 cancers were diagnosed, of which 671 were detected in screening exams, and
+313 emerged as interval cancers. Both invasive and ductal \textit{in situ} (non-invasive) breast
+cancer carcinomas are included. 
+
+Among several risk factors studied, the existence of a FP result in the previous
+mammogram showed the highest hazard ratio for developing interval cancer, HR=2.71
+\cite{Blanch2014}. The corresponding hazard ratio for screen-detected cancer was 1.34. The authors
+also reported that the effect of a previous FP result was higher for interval cancers
+classified as false negative tumours, HR=8.79, than for true interval cancers, HR=2.26.
+
+\section*{Methods}
+We assume a three-state model 
+
+\begin{displaymath}
+\centering
+\xymatrix @R=0.15cm @C=2cm {
+S_0 \ar@{->}[r] & S_p \ar@{->}[r]^{\tau-x} & S_c \\
+ & x & \tau \\
+}
+\end{displaymath}
+
+where $S_0$ indicates absence of breast cancer, $S_p$ indicates the pre-clinical state, where
+breast cancer is asymptomatic but can be detected with a diagnostic test i.e.\ mammography, and
+$S_c$ indicates the clinical state or presence of symptoms \cite{Lee1998, Lee2003b}.  The ages at
+entering $S_p$ and $S_c$ are $x$ and $\tau$, respectively; $\tau-x$ is the sojourn time in $S_p$. 
+
+The following examples illustrate some possibilities that result from the interaction of the
+natural history of the disease and the screening process. The times $t_i, i=0,..., n$ indicate when
+the mammography exams are scheduled. We assume that women attend the exams and that mammogram
+sensitivity is not 100\%. 
+
+\begin{enumerate}
+  \item Before starting the screening exams the woman enters $S_p$ and then $S_c$. 
+\begin{displaymath}
+\xymatrix @R=0.3cm @C=0.7cm {
+& & t_0 & t_1 & t_2 &   & t_{n-1} & t_n \\
+\ar@{-}[rr]|{S_p-S_c} & & | \ar@{-}[r] & | \ar@{-}[r] & | \ar@{-}[r] &  /.../ \ar@{-}[r] & | \ar@{-}[r] & | \ar@{->}[r] & \\
+}
+\end{displaymath}
+This woman is not included in the study because she is diagnosed of breast cancer before the first
+screening exam at time $t_0$, with the exception of being misclassified because of sensitivity of
+mammography lower than 100\%.
+  \item The woman enters $S_p$ before the first screening exam and enters $S_c$ between $t_0$ and
+  $t_1$.
+\begin{displaymath}
+\xymatrix @R=0.3cm @C=0.7cm {
+& & t_0 & t_1 & t_2 &  & t_{n-1} & t_n \\
+\ar@{-}[rr]|{S_p} & & | \ar@{-}[r]|{S_c} & | \ar@{-}[r] & | \ar@{-}[r] & /.../ \ar@{-}[r] & | \ar@{-}[r] & | \ar@{->}[r] & \\
+}
+\end{displaymath}
+There are two possibilities: a) an early diagnosis at time $t_0$ where age at entering $S_c$ will
+not be observed; or b) the mammography exam misses the tumour and it is symptomatically diagnosed
+at time $t$ between $t_0$ and $t_1$. If a) the tumour is screen-detected, if b) it is the type of
+interval cancer called \textit{false negative}.
+  \item The next example corresponds to the type of interval cancer called \textit{true interval}.
+\begin{displaymath}
+\xymatrix @R=0.3cm @C=0.7cm {
+& & t_0 & t_1 & t_2 & t_3 &  & t_{n-1} & t_n \\
+\ar@{-}[rr] & & | \ar@{-}[r]|{S_p-S_c} & | \ar@{-}[r] & | \ar@{-}[r] & | \ar@{-}[r] & /.../ \ar@{-}[r] & | \ar@{-}[r] & | \ar@{->}[r] & \\
+}
+\end{displaymath}
+\end{enumerate}
+
+\subsection*{Time scale, censoring, and late entry}
+For the time to $S_p$, two time scales can be chosen: time since entry into the screening program,
+or age. Age is a more relevant time scale, since it directly reflects the biological process. The
+incidence of pre-clinical cancer since entry additionally also depends on the study design, i.e.\ 
+at what age women enter the study. For time to $S_c$, the same time scale can be chosen, but it may
+be of more interest to study the sojourn time, i.e.\ time from $S_p$ to $S_c$. In the multi-state
+theory, this is called the \textit{clock-reset} approach.
+
+In the data, the transition $S_0 \rightarrow S_p$ is interval-censored. We can assume that the
+transition $S_p \rightarrow S_c$ is either observed exactly or right-censored. When the sojourn
+time is the estimand, such data have been called doubly (interval) censored. The situation is
+similar to the estimation of time from HIV infection to AIDS. Typically, HIV infection is not
+observed exactly but only known to lie in the interval between a last HIV negative test and a first
+HIV positive test. AIDS is usually either observed exactly or right-censored.
+
+In the INCA study not all women entered the screening program at the age of 50. Women that were
+above 50 when the program started entered only when they had not yet developed symptoms: they had
+to be free of clinical cancer. Phrased otherwise, women that already developed pre-clinical or
+clinical cancer before they would enter the screening program are missed. This may give rise to
+left truncated data.
+  
+Women that have a pre-clinical cancer detected are treated. As a consequence, the clinical cancer
+will not occur. This implies that transitions $S_p \rightarrow S_c$ are never observed in these
+women. This is a form of informative censoring for the estimation of the sojourn time distribution.
+Women with a short sojourn time are more likely to have an interval cancer, i.e.\  to have the
+clinical cancer observed instead of the screen detected cancer. In fact, if mammography was 100\%
+sensitive, women that have a sojourn time of more than two years will always be censored at the
+first screening visit at which the pre-clinical cancer is observed. 
+
+Estimation of the distribution of age at pre-clinical cancer may still be possible. However, if we
+use the time of interval cancer as right hand side of the detection interval, the observation times
+are no longer independent of the event times. An alternative to explore is to set the right hand
+side at the time at which the first subsequent screening exam would be performed, even though this
+was not actually done.
+
+\subsection*{A Markov multi-state model for breast cancer screening}
+A Markov multi-state model describes how individuals move between a series of states in continuous
+time \cite{Jackson2011, Geskus2016}. In a Markov model, the next state and the time at which the
+transition occurs only depends on the present state \cite{Putter2007}. A change of state is called
+a transition, or an event. Transition intensities that may depend on time $t$, or also on a set of
+covariates $z(t)$, represent the instantaneous risk or hazard of moving from state $r$ to state
+$s \neq r$
+\[q_{rs}(t;z(t)) =  \underset{\delta t \rightarrow 0} {\lim}\frac{P(S(t+\delta t) = s | S(t) = r, z(t))}{\delta t}.\]
+where $S(t)$ indicates the state of an individual at time $t$.
+
+\subsection*{Statistical analysis}
+We used three approaches to analyse the INCA-CAT data, 1) the multi-state model, 2) the Cox model,
+which is the more frequently used in the literature to assess risk factors of breast cancer, and 3)
+the discrete-time model which also has been used in similar studies \cite{Blanch2013, Ripping2016}.
+
+When using the multi-state model, we started with a 3-state model and assumed that a) the
+transition intensity $S_0 \rightarrow S_p$ increases with age, as it does incidence of breast
+cancer; b) the time at entering $S_p$ is interval-censored between the time of a negative exam and
+the time of breast cancer diagnosis; c) the time at entering $S_c$ is exact for women with IC and
+is right-censored for women with SD cancer; d) there are censored states due to the sensitivity of
+the mammogram being lower than 100\%; e) false-positive result in the screening mammogram is a
+time-dependent covariate that is measured as 0 in the absence of a FP result and 1 from
+the time of the first FP result. With this model we estimated the effect of a FP result
+on the time to entering $S_p$. Then, we considered a 2-state model where the event was BC diagnosis
+(SC or IC) and compared the effect of FP on BC diagnosis if the IC was detected between screens or
+in the next screen. The {\tt msm} package for {\tt R} \cite{Jackson2011} was used for the
+multi-state analyses.
+
+When using the Cox or the discrete-time models, we also performed different analyses. First, we
+applied a cause-specific strategy for SD and IC, separately, as in competing risks analysis. For
+each cause-specific model, the competing event was censored. Second, we considered that the event
+was breast cancer diagnosis, either SD or IC. We estimated the effect of a FP result in two
+scenarios, considering the exact age at the IC diagnosis and assuming that the IC cancer was
+diagnosed in the next screening exam.
+
+In addition, we conducted a simulation study to explore the performance of the different models for
+measuring the effect of a FP result on risk of breast cancer. We were interested in
+assessing two sources of bias, first the one that arises from the assumptions of the statistical
+models and then the bias that originates when the statistical models are applied to data only
+partially observed due to the screening process. We worked with two types of simulated datasets, 1)
+the \textit{complete data} type which contains all the information on the natural history of breast
+cancer, and 2) the \textit{observed data} type which contains the partially observed data as a
+consequence of the screening.
+
+\subsection*{Simulation study}
+We simulated the natural history of breast cancer as an progressive illness multi-state model with
+the three states and transitions $S_0 \rightarrow S_p \rightarrow S_c$. The following assumptions
+were made:
+
+\begin{enumerate}
+  \item \textbf{Simulation procedures:}
+
+For each specific combination of assumptions, the same database of simulated datasets was used to
+compare the statistical methods of interest. Non-convergence failures were monitored and used to
+assess if inadequate assumptions were made. The {\tt R} random sampling functions for specific
+distributions were used to generate the random variables. To enable replication of the datasets, a
+seed was specified. We simulated 500 datasets with 62,000 women in each dataset. 
+
+  \item \textbf{Methods for generating the datasets:} 
+
+  \begin{enumerate}
+    \item \textbf{Time scale}: Age is the time scale with age 50 years as the origin.
+    \item \textbf{Time to the pre-clinical state, $T_p$}: We assume that it follows a Weibull
+    distribution, We$(\lambda,\nu)$ with $\lambda$ and $\nu$ the scale and shape parameters,
+    respectively, where $h_0(t)=\lambda \nu t^{\nu-1}$ is the baseline risk function of a
+    conventional relative risk model. Times to $S_p$ were generated using the method proposed by
+    Austin \cite{Austin2012, Bender2005} for Cox models.
+    \item \textbf{Time to study entry, $T_e$}: We will make two assumptions, without and with late
+    entry. For the late entry scenario we assume that the time at entering follows a uniform
+    distribution, $U(0,15)$, and all the data previous to $T_e$ will not be used.
+    \item \textbf{Sojourn time in the pre-clinical state, $T_s$}: We assume that it follows an
+    exponential distribution Exp(0.25), which corresponds to a mean time in $S_p$ equal to 4 years
+    \cite{Lee1998}.
+    \item \textbf{Time to the clinical state, $T_c$}: $T_c=T_p+T_s$.
+    \item \textbf{Mammogram sensitivity}: We assume two different values, 100\% and 85\%. We assume
+    that each screening exam is independent within a woman over time.
+    \item \textbf{Incidence of FP results}: We assumed binomial distributions with
+    varying probabilities conditional to the exam sequence number, according to the Rom\'an study
+    \cite{Roman2012}.
+    \item \textbf{Effect of FP results on incidence of breast cancer}:  
+
+The presence of a FP result will modify the hazard of entering the pre-clinical state
+according to a relative risks model. Times to $S_p$ were generated using the closed-form expression
+proposed by Austin \cite{Austin2012} for Cox models with time varying covariates.
+
+    \item \textbf{Dropout}: dropout were associated with FP results. That assumption
+    was based on evidence that a FP result produces a decrease in the adherence to
+    screening, and this decrease is more pronounced if the FP result occurs in the
+    early exams. The RAFP study \cite{Roman2011b}, which included women of similar characteristics
+    as in the INCA study and used a multilevel discrete hazard model, was used to simulate a
+    dropout associated to FP results.
+    
+    \item \textbf{Number of screening exams}: We assumed ten screening exams as in the majority of the European mass screening programs. We
+    followed-up each woman until the first occurrence of breast cancer diagnosis, administrative 
+    censoring at 20 years of follow-up, and dropout during the study. %*** Jordi, he canviat aquest apartat eliminant els 4 ex\`amens ****
+  \end{enumerate}
+
+  \item \textbf{Scenarios to be investigated}:
+  \begin{enumerate}
+    \item With / without late entry.
+    \item We fixed the parameters for the Weibull distribution using the INCA-Cat dataset,
+    $scale=0.00025$ and $shape=1.5712$.
+    \item Hazard ratio of FP result for time to entering $S_p$ equal to 2.
+%     \item Dropout: random or related to the FP results. **** Revisar segons el què he comentat abans ****
+  \end{enumerate}
+
+  \item \textbf{Statistical methods to be evaluated}:
+  \begin{enumerate}
+    \item We used the {\tt msm} package in {\tt R} developed by Jackson \cite{Jackson2011} to fit
+    the multi-state models. The {\tt msm} package a) assumes time-homogeneous or piecewise constant
+    hazards. This is a limitation given that we have assumed a Weibull distribution for the time to
+    $S_p$, and an exponential distribution for the sojourn time in $S_p$; b) allows for interval-censored transitions and this can be considered a strength of the {\tt msm} package; c) allows
+    for misclassification of states, which is also an asset, given that mammography has sensitivity
+    and specificity lower than 100\%.
+    \item We estimated the effect of a FP result with the Cox model. We applied a cause-specific
+    strategy for SD and IC, separately. The counting process structure allows to account for
+    left-truncation and time-dependent covariates, as well as non proportional-hazards. We used the
+    {\tt coxph} function of the {\tt survival} package {\tt R}.
+    \item We estimated the discrete-time model using a logit link for the hazard of the event. The
+    model contains a time indicator variable given by the prior number of screening rounds attended which
+    acts as multiple intercepts, one per screening round \cite{Roman2011b}. The time indicator variable
+    represents the baseline logit hazard function \cite{Singer2003}. Age was included as a continuous covariate. As in the Cox model, we
+    applied a cause-specific strategy for SD and IC, separately. We considered that the event time
+    corresponds to the last observed screening round. We used the {\tt glm} function of the
+    {\tt stats} package in {\tt R}.
+  \end{enumerate}
+
+  \item \textbf{Summary measures of performance}: absolute bias, relative bias (as percentage of
+  the true value), mean square error, and coverage of confidence intervals.
+\end{enumerate}
+
+In each simulation, we focus on quantifying the potential bias due to late-entry and the censoring
+after detection of pre-clinical cancer. To quantify the bias due to late-entry, we performed two
+simulations for each scenario, with and without late-entry. The second potential bias is due to the
+fact that the sojourn time is informatively censored. A woman with a screen detected cancer
+receives treatment and therefore, it is not possible to observe the time to $S_c$. We assess the
+effect of not observing the time to $S_c$, when evaluating the effect of a FP result on entering
+the pre-clinical state $S_p$.
+
+As a secondary analysis we reduced the three-state model to a two-state model with 1: $S_0$
+(absence of breast cancer) and 2: $S_p$ or $S_c$ (breast cancer). Here the time $T$ of interest is
+age at breast cancer diagnosis (either screen-detected or symptomatically detected). $T$ can be
+right-censored since each women is followed until breast cancer, or end of study. Lost to follow-up
+is simulated as non-related or related to the FP status. For clinically diagnosed
+tumours, we also assessed the effect of extending the follow-up to the next screening exam for
+estimating the effect of a FP result on the incidence of breast cancer, indistinctly
+screen-detected or symptomatic.
+
+\section*{Results}
+\subsection*{Simulation study}
+In this section we present the results of the simulation study and try to relate the models
+performance to their assumptions and to the specificities of the data. For the complete data
+analyses we have assumed that there are three states. We assume that women receive 10 biennial
+mammographic exams at the age interval 50-69 years, age at entering screening may or may not have
+late entry, and the HR of a false-positive result is 2.
+
+\subsubsection*{Transition intensities for the three states multi-state model. Complete and observed
+                data}
+Figures \ref{fig:trans_complete} and \ref{fig:trans_observed} present the simulated (theoretical)
+and estimated transition intensities in the age interval 50-69 years for the \textbf{complete} and
+the \textbf{observed} datasets, respectively. For complete data, the estimated
+$S_0 \rightarrow S_p$ piecewise constant transition rates overlap with the theoretical Weibull
+function and the estimated $S_p \rightarrow S_c$ transition rate is unbiased (Figure
+\ref{fig:trans_complete}). Late entry does not change these results. With observed data, the
+estimated $S_0 \rightarrow S_p$ piecewise constant rates follow the Weibull pattern, similarly to
+the complete data scenario, but the estimated transition rate overestimates considerably the
+theoretical rate (Figure \ref{fig:trans_observed}).
+
+\subsubsection*{Hazard ratio of a FP result, for the three state models. Complete data}
+Before interpreting the results it is important to mention that the HR of FP for the transition
+$S_p \rightarrow S_c$ only can be estimated when using multi-state models. We have simulated the
+data assuming that a FP result is associated with the transition $S_0 \rightarrow S_p$ with a
+$HR = 2$ and it is not associated with the transition $S_p \rightarrow S_c$ (HR=1). For the
+multi-state model these values are our theoretical values. For the Cox and discrete time models only
+the transitions $S_0 \rightarrow S_p$ and $S_0 \rightarrow S_c$ can be estimated. We have assessed
+the performance of these models assuming that the theoretical HR value for both transitions is 2.
+
+Table \ref{tab:HRFP_complete} shows the performance of the studied models, when considering
+\textbf{three states} and \textbf{complete data}, with respect to the estimation of the theoretical
+HR of having a FP result in the screening mammogram for the transitions $S_0 \rightarrow S_p$ and
+$S_p \rightarrow S_c$. The MS3 model performs very well for both transitions, either \textit{with
+or without late entry}, with very low bias and coverage higher than 95\%.
+
+The Cox CS model has also good properties when estimating the HR of a FP result for the
+$S_0 \rightarrow S_p$ transition. For the $S_0 \rightarrow S_c$ the $\overline{\hat\beta}$ value
+slightly underestimates the true $\beta$ value with a bias around 2.5\%, independently of the
+presence/absence of \textit{late entry}. Coverage is slightly lower than 95\% for the
+$S_0 \rightarrow S_c$ transition with \textit{late entry}.
+
+The discrete time model with three states (DT3) does not perform as well as the MS3 and the Cox CS
+models. In this case the percentage bias of the $\overline{\hat\beta}$ associated to the
+$S_0 \rightarrow S_c$ transition approaches 5\% and the coverage of the HR intervals for the
+$S_0 \rightarrow S_p$ transition is lower than 80\%, for both scenarios \textit{with/without late
+entry}.
+
+\subsubsection*{Hazard ratio of a FP result, for the three state models. Observed data}
+Table \ref{tab:HRFP_observed3} shows the performance of the studied models for the HR of a FP, when
+considering \textbf{three states} and \textbf{observed data}. \textit{With or without late entry},
+both the MS3 and the Cox CS models perform well in terms of bias, MSE, and coverage. Instead, the
+DT3 model shows considerable bias (around 10\% overestimation) and high MSE when estimating the HR
+of a FP result for the $S_0 \rightarrow S_c$ transition. The coverage of the intervals for this HR
+is lower than 90\% \textit{without late entry} and near 95\% \textit{with late entry} which
+probably is due to wide confidence intervals of the estimated HRs as the high MSE indicates.
+
+\subsubsection*{Hazard ratio of a FP result, for the two state models. Observed data}
+Table \ref{tab:HRFP_observed2} presents the performance of the studied models for the HR of a FP
+result, when considering \textbf{two states} in the \textbf{observed data}. Here it is assumed that
+the time to the event of interest is the time when the tumour is detected, either by screening or
+clinically. We also have assessed the scenario that, for the clinically detected tumours, assumes
+that the time to event is the time at the next screening exam. 
+
+We observe a good performance of the three studied methods, with a better performance of the
+multi-state model with \textit{no late entry} followed by the discrete time (DT2 next screen) and
+the Cox model (either exact time or next screen). The DT2 exact time model slightly overestimates
+the effect and \textit{with late entry} has lower coverage that the other methods. 
+
+\subsection*{Aplication to the INCA-CAT study}
+Tables \ref{tab:HR3INCA} and \ref{tab:HR2INCA} present the estimates of the HR of FP
+result when applying the models to the INCA-CAT data. 
+
+When the studied models were applied to the INCA study and the three states $S_0$, $S_p$ and $S_c$
+were considered, the multi-state and the Cox models provided similar estimates for the HR of FP on
+the $S_0 \rightarrow S_p$ transition ($HR \simeq 1.77$).  However, the discrete-time model
+provided a higher estimate of the HR, $1.93$. For the $S_p \rightarrow S_c$ transition, we obtained
+a HR near to 1 as in the simulation study. The $S_0 \rightarrow S_c$ transitions estimated with the
+Cox and the discrete time models provide different values, HR around $1.92$ and $1.22$,
+respectively.
+
+When considering only two states, with no distinction between pre-clinical or clinically detected
+cancer, all the three models provide similar results, with the HR of a FP result varying from
+$1.68$ to $1.73$, when the time of clinically detected cancer is considered an exact time. When the
+time of clinically detected cancer is extended up to the next screening exams, the three estimated
+values vary from $1.64$ for the multi-state model to $1.82$ for the discrete-time model.
+
+\section*{Discussion}
+This study assessed the biases induced by early detection on the estimates of the effect of a
+mammographic FP result on the progression to pre-clinical and clinical BC. In addition, we
+evaluated the effect estimates obtained via parametric multi-state models, which are seldom used in
+the screening literature \cite{Uhry2010, Putter2006}, and semi-parametric Cox models or
+discrete-time models, which are common in this area \cite{Hofvind2006, Blanch2013,
+VonEuler-Chelpin2012, Castells2013b, Blanch2014, Ripping2016}. A simulation study, has provided
+information on how the assumptions of the statistical models, or the fact that these models are
+applied to data partially observed, affect the parameter estimates. 
+
+The simulation study showed that, in general, all the models considered had an acceptable
+performance for estimating the effect of a FP result, in the different scenarios assessed. When we
+worked with three health states, $S_0$, $S_p$ and $S_c$, the multi-state model showed the best
+performance in all the scenarios, either for complete or observed data. The three-state model was
+followed by the Cox cause-specific and the discrete-time models with good and fair performances,
+respectively. The simulation analysis of the two-state models showed good performance of the three
+modelling approaches considered. The multi-state model with no late entry showed the best
+performance followed by the discrete-time model with time at the next screen for the clinically
+diagnosed tumours, and then the Cox model in all the assessed scenarios. Therefore, although with
+our simulated data all the studied models perform satisfactorily, the multi-state model worked
+better than the other two.
+
+When the studied methods were applied to the INCA study and three states were considered, the
+multi-state and the Cox cause-specific models provided similar results for the effect of a FP on
+the $S_0 \rightarrow S_p$ transition, whereas the discrete time model differed from them. When both
+pre-clinical and clinical cancers were grouped together, again the multi-state and the Cox model
+provided similar results. In this scenario of only two states (no cancer/cancer) the discrete time
+model did not differed much from the multi-state and the Cox models. It is important to mention
+that the low incidence of breast cancer in women invited to screening may have made it difficult to
+observe more marked differences between the methods.
+
+There are three main differences between the three models compared, 1) the time metric, 2) the type
+of censoring for the time to $S_p$, and 3) the assumption of progressive disease versus competing
+risks. First, according to Singer and Willet no single time metric is universally appropriate, and
+even different scales might be used to study the same event \cite{Singer2003}. Whereas in the
+multi-state and Cox models the time scale was age as a continuous variable \cite{Uhry2010,
+Putter2006, Hofvind2006, Blanch2014}; in the discrete-time model we used the prior number of
+screening rounds attended, as is generally done in the literature \cite{Blanch2013, Castells2013b,
+Ripping2016}. Then, whereas the multi-state and Cox models take into account the elapsed time
+between participations, the discrete-time model assumes that times between screening exams are
+equal \cite{Singer2003}. This assumption was satisfied in the simulation study; but not in INCA
+study, were women could have dropped a screening exam and return to screening afterwards. Probably
+the overestimated effect in the INCA study for the discrete-time model may be related to a
+violation of this assumption in a subgroup of participants. 
+
+The second difference is the type of censoring for the times of interest. All the studied models
+assume that time to $S_c$ is exact for clinically detected cancers and right-censored for screen
+detected cancers, $S_p$. Multi-state models assume that time to $S_p$ is interval-censored between
+two screening exams and can be estimated for both, screen or clinically, detected cancers. The Cox
+model also can handle interval-censoring, so time to $S_p$ could be estimated, but this is not
+generally done in the early detection literature. Instead, the time to screen detection is used.
+Given that this time depends on the periodicity of the screening exams, it seems more reasonable to
+estimate the time to $S_p$. Other authors also consider that the interval-censoring approach is
+better, because it can take account for the probability of entering the pre-clinical stage, $S_p$,
+between visits or between the last visit and the time to $S_c$ \cite{Leffondre2013}. And, our
+results show that the multi-state model provides a less biased estimate that the other models,
+whether there is left-truncation or not.  
+
+%
+%The second difference is the type of censoring (interval or right) for the time to $S_p$. So, the estimation of the multi-state model is the same independently of the %presence of left-truncation and less biased than the other models.The multi-state model assume a
+%interval-censored time-to-event for $S_p$ and the other two  assume a right-censored. Leffondr\'e
+%argue that interval-censored is better, because it can take account for the probability of
+%developing the pre-clinical stage, $S_p$, between visits or between the last visit and the time to
+%$S_c$ \cite{Leffondre2013}.
+
+
+Third, we have compared a progressive illness multi-state model that models the transition of women
+among the different states of breast cancer with competing risks models that, in general, assume
+unrelated competing events \cite{Putter2007}. For instance, in the competing risks model, the event
+\textit{screen detected} cancer is considered a competing event to \textit{symptomatically
+diagnosed} \cite{Putter2007, Allignol2011}. Even though for some of the simulated scenarios the
+estimated effect of a FP result is similar in both types of models, the progressive illness model
+reflects better the natural history of the disease and therefore, conceptually is more adequate.
+
+As in most simulation studies, our assumptions could not cover all the possible scenarios. In
+particular, 1) we focused on studying the effect of one time-varying variable, a FP result, to the
+specific transitions among health states. 2) We assumed that the transition intensities were
+proportional with respect to the covariate values and that lost-to follow-up was missing at random.
+3) We assumed that when a woman does not attend a screening test, she never returns to participate, although, in real life women may have intermittent participation in screening. 4) Based on the organization of the public screening program, we assumed that the exam times were independent of
+the cancer progression process. 5) We assumed that the presence of a FP result does not affect the
+sojourn time in $S_p$ in women that enter this state. 6) In the INCA study, it is possible that
+some breast cancers diagnosed in women that participate in population screening are detectable but
+missed at screening (false negative) and therefore are misclassified as interval cancers. The multi-state models can use a hidden Markov process to account for misclassification. In our case, the assumption of hidden Markov process did not modify the model estimates.
+
+
+\section*{Conclusions}
+Our work suggests that the multi-state models are the most appropriate for estimating breast cancer
+progression within the screening context. The simulation study has shown that, in the context of breast cancer screening, other types of models widely used in the literature, like the Cox or discrete-time models, have provided similar results to the multi-state models.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                          %%
+%% Backmatter begins here                   %%
+%%                                          %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{backmatter}
+\section*{Competing interests}
+The authors declare that they have no competing interests.
+
+\section*{Author's contributions}
+MR, RG and JB conceived the study. JB carried out the implementation with the supervision of MR. JB, RG 
+and MR drafted the first version of the manuscript. All authors contributed to the writing and
+approved the final version.
+
+\section*{Acknowledgements}
+This paper was supported by the research grant PRX16/00028 from the Spanish Ministry of Education,
+Culture and Sports, and partially supported by the research grant PI14/00113 from the Spanish
+Ministry of Economy and Competitiveness and by GRAES-2014-SGR978 from the Generalitat de Catalunya.
+We thank the researchers of the RAFP and INCA projects for having provided their data.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                  The Bibliography                       %%
+%%                                                         %%
+%%  Bmc_mathpys.bst  will be used to                       %%
+%%  create a .BBL file for submission.                     %%
+%%  After submission of the .TEX file,                     %%
+%%  you will be prompted to submit your .BBL file.         %%
+%%                                                         %%
+%%                                                         %%
+%%  Note that the displayed Bibliography will not          %%
+%%  necessarily be rendered by Latex exactly as specified  %%
+%%  in the online Instructions for Authors.                %%
+%%                                                         %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% if your bibliography is in bibtex format, use those commands:
+\bibliographystyle{bmc-mathphys} % Style BST file (bmc-mathphys, vancouver, spbasic).
+\bibliography{bib/blanch}      % Bibliography file (usually '*.bib' )
+% for author-year bibliography (bmc-mathphys or spbasic)
+% a) write to bib file (bmc-mathphys only)
+% @settings{label, options="nameyear"}
+% b) uncomment next line
+%\nocite{label}
+
+% or include bibliography directly:
+% \begin{thebibliography}
+% \bibitem{b1}
+% \end{thebibliography}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                               %%
+%% Figures                       %%
+%%                               %%
+%% NB: this is for captions and  %%
+%% Titles. All graphics must be  %%
+%% submitted separately and NOT  %%
+%% included in the Tex document  %%
+%%                               %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%
+%% Do not use \listoffigures as most will included as separate files
+
+\section*{Figures}
+\begin{figure}[!ht]
+  \caption{%\csentence{Sample figure title.}
+           Transition intensities for the multi-state with three states (MS3) model. Complete
+           data.}
+  \label{fig:trans_complete}
+\end{figure}
+
+\begin{figure}[!ht]
+  \caption{Transition intensities for the multi-state with three states (MS3) model. Observed data.}
+  \label{fig:trans_observed}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                               %%
+%% Tables                        %%
+%%                               %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Use of \listoftables is discouraged.
+%%
+\section*{Tables}
+
+\begin{table}[!ht]
+  \caption{Simulation results for the complete data. Three state models.}
+  \begin{threeparttable}
+    \begin{tabular}{l|c|c|c|c|c|c}
+    \toprule
+    \textbf{Method} & \textbf{HR} & \textbf{Parameter} &\multicolumn{4}{c}{\textbf{Performance}\tnote{a,b}} \\ \cline{4-7}
+    & & & \textbf{Bias} & \textbf{Percentage} & \textbf{Accuracy}  &  \textbf{Coverage}  \\
+    & & & & \textbf{Bias} &   \textbf{MSE}\\
+    \midrule
+    \multirow{2}{*}{\parbox{0.2\textwidth}{MS3, no LE}} & 2 & HR$_{S_0 \rightarrow S_p}$ &0.0043&	0.22& 0.0104	& 97.20\\
+    & 1 & HR$_{S_p \rightarrow S_c}$ & 0.0010	& 0.10	& 0.0042	&95.80\\
+    \cmidrule{1-7}
+    \multirow{2}{*}{\parbox{0.2\textwidth}{MS3, LE}} & 2 & HR$_{S_0 \rightarrow S_p}$ &0.0050&	0.25	&0.0118&	94.80\\
+    & 1 & HR$_{S_p \rightarrow S_c}$ & 0.0049&	0.49&	0.0046 & 95.60\\
+    \midrule
+    \multirow{2}{*}{\parbox{0.2\textwidth}{Cox CS, no LE}} & \multirow{2}{*}{2} & HR$_{S_0 \rightarrow S_p}$ &-0.0203&-1.01&0.0136&	97.20\\
+    && HR$_{S_0 \rightarrow S_c}$ &-0.0539&-2.69&0.0173&95.00\\
+    \cmidrule{1-7}
+    \multirow{2}{*}{\parbox{0.2\textwidth}{Cox CS, LE}} & \multirow{2}{*}{2} & HR$_{S_0 \rightarrow S_p}$ &-0.0212&-1.06&	0.0154&	95.40\\
+    && HR$_{S_0 \rightarrow S_c}$ & -0.0493&-2.47&0.0179&93.40\\
+    \midrule
+    \multirow{2}{*}{\parbox{0.2\textwidth}{DT3, no LE}} & \multirow{2}{*}{2} & HR$_{S_0 \rightarrow S_p}$ &-0.0431&	-2.16&	0.0176&	77.60\\
+    && HR$_{S_0 \rightarrow S_c}$ &0.0824&	4.12	&0.0239 & 91.60\\
+    \cmidrule{1-7}
+    \multirow{2}{*}{\parbox{0.2\textwidth}{DT3, LE}} & \multirow{2}{*}{2} & HR$_{S_0 \rightarrow S_p}$ &-0.0495&	-2.48&	0.0198&	74.80\\
+    && HR$_{S_0 \rightarrow S_c}$ &0.1063& 5.18&0.0282&	88.80\\
+    \bottomrule
+    \end{tabular}
+    \begin{tablenotes}\scriptsize
+      \item HR: hazard ratio of a false positive result, MS3: multi-state models with three states, LE: late entry, CS: cause-specific, DT: discrete time event.
+      \item[a] Bias=$\delta=\overline{\hat\beta}-\beta$; Percentage bias=$\left(\frac{\overline{\hat\beta}-\beta}{\beta}*100 \right)$; Accuracy or mean square error (MSE): $(\overline{\hat\beta}-\beta)^2+(\mbox{SE}(\hat \beta))^2$;  Coverage: percentage of confidence intervals that contain the true HR.
+      \item[b] Assumptions:.....
+    \end{tablenotes}
+  \end{threeparttable}
+  \label{tab:HRFP_complete}
+\end{table}
+
+\begin{table}[!ht]
+  \caption{Simulation results for the observed data. Three state models.}
+  \begin{threeparttable}
+    \begin{tabular}{l|c|c|c|c|c|c}
+      \toprule
+      \textbf{Method} &   \textbf{HR} & \textbf{Parameter} &\multicolumn{4}{c}{\textbf{Performance}\tnote{a,b}} \\ \cline{4-7}
+      & & & \textbf{Bias} & \textbf{Percentage} & \textbf{Accuracy}  &  \textbf{Coverage}  \\
+      & & & & \textbf{Bias} &   \textbf{MSE}\\
+      \midrule
+      \multirow{2}{*}{\parbox{0.2\textwidth}{MS3, no LE}} & 2 & HR$_{S_0 \rightarrow S_p}$ &0.0072&0.36&0.0106&	97.40\\
+      &1 & HR$_{S_p \rightarrow S_c}$& 0.0186	&1.86&0.0150&	94.80\\
+      \cmidrule{1-7}
+      \multirow{2}{*}{\parbox{0.2\textwidth}{MS3, LE}} & 2 & HR$_{S_0 \rightarrow S_p}$ &0.0075 &0.37&0.0123&	94.40\\
+      & 1 & HR$_{S_p \rightarrow S_c}$ &0.0242&2.42	&0.0153	&94.00\\
+      \midrule
+      \multirow{2}{*}{\parbox{0.2\textwidth}{Cox CS, no LE}} & \multirow{2}{*}{2} & HR$_{S_0 \rightarrow S_p}$ &-0.0197 &	-0.98&0.0149& 96.00\\
+      && HR$_{S_0 \rightarrow S_c}$ & -0.0233&	-1.51 &0.0479	& 95.80\\
+      \cmidrule{1-7}
+      \multirow{2}{*}{\parbox{0.2\textwidth}{Cox CS, LE}} & \multirow{2}{*}{2} & HR$_{S_0 \rightarrow S_p}$ &-0.0211 &-1.06 &	0.0174 &	95.00\\
+      && HR$_{S_0 \rightarrow S_c}$ &-0.0152	&-0.76	&0.0477&95.60\\
+      \midrule
+      \multirow{2}{*}{\parbox{0.2\textwidth}{DT3, no LE}} & \multirow{2}{*}{2} & HR$_{S_0 \rightarrow S_p}$ & 0.0073	&0.36	&0.0136&	96.80\\
+      && HR$_{S_0 \rightarrow S_c}$ &0.1899	&9.49	&0.0974	&87.20\\
+      \cmidrule{1-7}
+      \multirow{2}{*}{\parbox{0.2\textwidth}{DT3, LE}} & \multirow{2}{*}{2} & HR$_{S_0 \rightarrow S_p}$ &0.0035&	0.17	&0.0142&	93.60\\
+      && HR$_{S_0 \rightarrow S_c}$ &0.2282&	11.41&	0.1119&	84.80\\
+      \bottomrule
+    \end{tabular}
+    \begin{tablenotes}\scriptsize
+      \item HR: hazard ratio of a false positive result, MS3: multi-state models with 3 states, LE: late entry, CS: cause-specific, DT: discrete time event.
+      \item[a] Bias=$\delta=\overline{\hat\beta}-\beta$; Percentage bias=$\left(\frac{\overline{\hat\beta}-\beta}{\beta}*100 \right)$; Accuracy or mean square error (MSE): $(\overline{\hat\beta}-\beta)^2+(\mbox{SE}(\hat \beta))^2$; Coverage: percentage of confidence intervals that contain the true HR.
+      \item[b] Assumptions: .....
+    \end{tablenotes}
+  \end{threeparttable}
+  \label{tab:HRFP_observed3}
+\end{table}
+
+\begin{table}[!ht]
+  \caption{Simulation results for the observed data. Two state models.}
+  \begin{threeparttable}
+    \begin{tabular}{l|c|c|c|c|c}
+      \toprule
+      \textbf{Method} & \textbf{Parameter} &\multicolumn{4}{c}{\textbf{Performance}\tnote{a,b}} \\ \cline{3-6}
+      &   \textbf{HR$_{S_0 \rightarrow S_c}$} & \textbf{Bias} & \textbf{Percentage} & \textbf{Accuracy}  &  \textbf{Coverage}  \\
+      & & & \textbf{Bias} &   \textbf{MSE}\\
+      \midrule
+      MS2 exact time, no LE&   & 0.0070&0.35&0.0106	&97.40\\
+      \cmidrule{1-6}
+      MS2 exact time, LE&  &0.073&	0.36&	0.0132&	94.40\\
+      \cmidrule{1-6}
+      MS2 next screen, no LE & & 0.0064&	0.32	&0.0106&97.40\\
+      \cmidrule{1-6}
+      MS2 next screen, LE&  &0.0066 &0.33 &0.0122&	94.40\\
+      \midrule
+      Cox exact time, no LE&  &-0.0225&	-1.13&	0.0106&	96.80\\
+      \cmidrule{1-6}
+      Cox exact time, LE&  & -0.0216&	-1.08&	0.0122&	95.60\\
+      \cmidrule{1-6}
+      Cox next screen, no LE&  &-0.0225&	-1.13&	0.0106&	96.60\\
+      \cmidrule{1-6}
+      Cox next screen, LE&  &-0.0216&	-1.08&	0.0122&	95.60\\
+      \midrule
+      DT2 exact time, no LE & &0.0497&	2.49&	0.0125	&94.80\\
+      \cmidrule{1-6}
+      DT2 exact time, LE&  &0.0565	&2.83 &	0.0147	&92.80\\
+      \cmidrule{1-6}
+      DT2 next screen, no LE&  &-0.0035 &-0.17 &0.0095 &97.60\\
+      \cmidrule{1-6}
+      DT2 next screen, LE& & 0.0028	&0.14	&0.0109	&95.60\\
+      \bottomrule
+    \end{tabular}
+    \begin{tablenotes}\scriptsize
+      \item HR: hazard ratio of a false positive result, MS3: multi-state models with 3 states, LE: late entry, CS: cause-specific, DT: discrete time event.
+      \item[a] Bias=$\delta=\overline{\hat\beta}-\beta$; Percentage bias=$\left(\frac{\overline{\hat\beta}-\beta}{\beta}*100 \right)$; Accuracy or mean square error (MSE): $(\overline{\hat\beta}-\beta)^2+(\mbox{SE}(\hat \beta))^2$; 	 Coverage:..... 
+      \item[b] Assumptions: HR=2 for the $S_0 \rightarrow S_c$ transition.
+    \end{tablenotes}
+  \end{threeparttable}
+  \label{tab:HRFP_observed2}
+\end{table}
+
+\begin{table}[!ht]
+  \caption{INCA study: Three state models}
+  \begin{threeparttable}
+    \begin{tabular}{l|c|c}
+      \toprule
+      \textbf{Model} & \textbf{Parameter} & HR (95\% CI)\\
+      \midrule
+      \multirow{2}{*}{MS3} & HR$_{S_0 \rightarrow S_p}$ & 1.7685 (1.2115 - 2.5818)\\ %1.5620 (1.0163 - 2.4007)\\
+      &HR$_{S_p \rightarrow S_c}$ & 0.9997 (0.5192 - 1.9247)\\%0.6797 (0.3006 - 1.5367)\\
+      \midrule
+      \multirow{2}{*}{Cox, CS} & HR$_{S_0 \rightarrow S_p}$ & 1.7722 (1.3389 - 2.3457)\\%1.8500 (1.2920 - 2.6489)\\
+      & HR$_{S_0 \rightarrow S_c}$ & 1.6152 (1.1207 - 2.3279)\\%0.9507 (0.4467 - 2.0234)\\
+      \midrule
+      \multirow{2}{*}{DT3, CS} & HR$_{S_0 \rightarrow S_p}$ & 1.9500 (1.4283 - 2.6625)\\% 1.9488 (1.3243 - 2.7760)\\
+      & HR$_{S_0 \rightarrow S_c}$ & 1.2185 (0.6646 - 2.2341)\\%1.0742 (0.4499 - 2.1665)\\
+      \bottomrule
+    \end{tabular}
+  \end{threeparttable}
+  \label{tab:HR3INCA}
+\end{table}
+
+\begin{table}[!ht]
+  \caption{INCA study: Two state models}
+  \begin{threeparttable}
+    \begin{tabular}{l|c}
+      \toprule
+      \textbf{Model} & HR$_{S_0 \rightarrow S_c}$  (95\% CI)\\
+      \midrule
+      MS2, exact time & 1.6811 (1.1526 - 2.4520)\\%1.4888 (0.9691 - 2.2872)\\
+      MS2, next screen & 1.6472 (1.1296 - 2.4020)\\%1.4622 (0.9517 - 2.2466)\\
+      \midrule
+      Cox, exact time & 1.7051 (1.3643 - 2.1311)\\%1.5878 (1.1489 - 2.1943)\\
+      Cox, next screen & 1.7099 (1.3696 - 2.1346)\\%1.5632 (1.1317 - 2.1593)\\
+      \midrule
+      DT2, exact time &  1.7450 (1.3233 - 2.3011)\\%1.7075  (1.2068 - 2.3505)\\
+      DT2, next screen &  1.8243 (1.4305 - 2.3265)\\%1.3875 (0.9841 - 1.9018)\\
+      \bottomrule
+    \end{tabular}
+  \end{threeparttable}
+  \label{tab:HR2INCA}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                               %%
+%% Additional Files              %%
+%%                               %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \section*{Additional Files}
+%   \subsection*{Additional file 1 --- Sample additional file title}
+%     Additional file descriptions text (including details of how to
+%     view the file, if it is in a non-standard format or the file extension).  This might
+%     refer to a multi-page table or a figure.
+% 
+%   \subsection*{Additional file 2 --- Sample additional file title}
+%     Additional file descriptions text.
+\end{backmatter}
+\end{document}

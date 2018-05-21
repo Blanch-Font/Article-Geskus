@@ -1,0 +1,87 @@
+\section{Results}
+\subsection{Simulation study}
+In this section we present the results of the simulation study and try to relate the models
+performance to their assumptions and to the specificities of the data. For the complete data
+analyses we have assumed that there are three states. We assume that women receive 10 biennial
+mammographic exams at the age interval 50-69 years, age at entering screening may or may not have
+late entry, and the HR of a false-positive result is 2.
+
+\subsubsection{Transition intensities for the three states multistate model. Complete and observed
+               data}
+Figures \ref{fig:trans_complete} and \ref{fig:trans_observed} present the simulated (theoretical)
+and estimated transition intensities in the age interval 50-69 years for the \textbf{complete} and
+the \textbf{observed} datasets, respectively. For complete data, the estimated
+$S_0 \rightarrow S_p$ piecewise constant transition rates overlap with the theoretical Weibull
+function and the estimated $S_p \rightarrow S_c$ transition rate is unbiased (Figure
+\ref{fig:trans_complete}). Late entry does not change these results. With observed data, the
+estimated $S_0 \rightarrow S_p$ piecewise constant rates follow the Weibull pattern, similarly to
+the complete data scenario, but the estimated transition rate overestimates considerably the
+theoretical rate (Figure \ref{fig:trans_observed}).
+
+\subsubsection{Hazard ratio of a FP result, for the three state models. Complete data}
+Before interpreting the results it is important to mention that the HR of FP for the transition
+$S_p \rightarrow S_c$ only can be estimated when using multistate models. We have simulated the
+data assuming that a FP result is associated with the transition $S_0 \rightarrow S_p$ with a
+$HR = 2$ and it is not associated with the transition $S_p \rightarrow S_c$ (HR=1). For the
+multistate model these values are our theoretical values. For the Cox and discrete time models only
+the transitions $S_0 \rightarrow S_p$ and $S_0 \rightarrow S_c$ can be estimated. We have assessed
+the performance of these models assuming that the theoretical HR value for both transitions is 2.
+
+\paragraph{}Table \ref{tab:HRFP_complete} shows the performance of the studied models, when
+considering \textbf{three states} and \textbf{complete data}, with respect to the estimation of the
+theoretical HR of having a FP result in the screening mammogram for the transitions
+$S_0 \rightarrow S_p$ and $S_p \rightarrow S_c$. The MS3 model performs very well for both
+transitions, either \textit{with or without late entry}, with very low bias and coverage higher
+than 95\%.
+
+\paragraph{}The Cox CS model has also good properties when estimating the HR of a FP result for the
+$S_0 \rightarrow S_p$ transition. For the $S_0 \rightarrow S_c$ the $\overline{\hat\beta}$ value
+slightly underestimates the true $\beta$ value with a bias around 2.5\%, independently of the
+presence/absence of \textit{late entry}. Coverage is slightly lower than 95\% for the
+$S_0 \rightarrow S_c$ transition with \textit{late entry}.
+
+\paragraph{}The discrete time model with three states (DT3) does not perform as well as the MS3 and
+the Cox CS models. In this case the percentage bias of the $\overline{\hat\beta}$ associated to the
+$S_0 \rightarrow S_c$ transition approaches 5\% and the coverage of the HR intervals for the
+$S_0 \rightarrow S_p$ transition is lower than 80\%, for both scenarios \textit{with/without late
+entry}.
+
+\subsubsection{Hazard ratio of a FP result, for the three state models. Observed data}
+Table \ref{tab:HRFP_observed3} shows the performance of the studied models for the HR of a FP, when
+considering \textbf{three states} and \textbf{observed data}. \textit{With or without late entry},
+both the MS3 and the Cox CS models perform well in terms of bias, MSE, and coverage. Instead, the
+DT3 model shows considerable bias (around 10\% overestimation) and high MSE when estimating the HR
+of a FP result for the $S_0 \rightarrow S_c$ transition. The coverage of the intervals for this HR
+is lower than 90\% \textit{without late entry} and near 95\% \textit{with late entry} which
+probably is due to wide confidence intervals of the estimated HRs as the high MSE indicates.
+
+\subsubsection{Hazard ratio of a FP result, for the two state models. Observed data}
+Table \ref{tab:HRFP_observed2} presents the performance of the studied models for the HR of a FP
+result, when considering \textbf{two states} in the \textbf{observed data}. Here it is assumed that
+the time to the event of interest is the time when the tumour is detected, either by screening or
+clinically. We also have assessed the scenario that, for the clinically detected tumours, assumes
+that the time to event is the time at the next screening exam. 
+
+\paragraph{}We observe a good performance of the three studied methods, with a better performance
+of the multi-state model with \textit{no late entry} followed by the discrete time (DT2 next
+screen) and the Cox model (either exact time or next screen). The DT2 exact time model slightly
+overestimates the effect and \textit{with late entry} has lower coverage that the other methods. 
+
+\subsection{Aplication to the INCA-CAT study}
+Tables \ref{tab:HR3INCA} and \ref{tab:HR2INCA} present the estimates of the HR of false positive
+result when applying the models to the INCA-CAT data. 
+
+\paragraph{}When the studied models were applied to the INCA study and the three states $S_0$,
+$S_p$ and $S_c$ were considered, the multi-state and the Cox models provided similar estimates for
+the HR of FP on the $S_0 \rightarrow S_p$ transition ($HR \approx 1.77$).  However, the
+discrete-time model provided a higher estimate of the HR, $1.93$. For the $S_p \rightarrow S_c$
+transition, we obtained a HR near to 1 as in the simulation study. The $S_0 \rightarrow S_c$
+transitions estimated with the Cox and the discrete time models provide different values, HR around
+$1.92$ and $1.22$, respectively.
+
+\paragraph{}When considering only two states, with no distinction between pre-clinical or
+clinically detected cancer, all the three models provide similar results, with the HR of a FP
+result varying from $1.68$ to $1.73$, when the time of clinically detected cancer is considered an
+exact time. When the time of clinically detected cancer is extended up to the next screening exams,
+the three estimated values vary from $1.64$ for the multi-state model to $1.82$ for the
+discrete-time model.

@@ -1,0 +1,97 @@
+\section{Methods}
+% Especificar com respondrem els dos objectius
+% 
+% Objectiu principal:
+%   - Mètodes: MSM i Cox
+%   - Manera: 5 simulacions realitzades
+%   - Anàlisi de sensibilitat: amagar informació per reproduir més bé la realitat.
+% Objectiu secundari:
+%   - Allargem el temps de seguiment fins als 2.5 (o 2) anys per estudiar l'efecte sobre el hazard
+%     risc.
+%To answer the main objective, we made five simulations with a different features. In each
+%simulation, we estimated a Cox model and Markov multi-state models for panel data. To improve
+%simulation, we hide some information about the entrance to preclinical or clinical stage. For the
+%secondary objective, we uses the same simulation, but we simplify the model to represent a 2 state
+%model (healthy, ill) and we study the effect of detect a IC when they occur or in the next
+%screening.
+
+\paragraph{}We assume a three-state model 
+\begin{displaymath}
+\xymatrix @R=0.15cm @C=2cm {
+S_0 \ar@{->}[r] & S_p \ar@{->}[r]^{\tau-x} & S_c \\
+ & x & \tau \\
+}
+\end{displaymath}
+
+where $S_0$ indicates absence of breast cancer, $S_p$ indicates the pre-clinical state, where breast cancer is asymptomatic but can be detected with a diagnostic test i.e.\ mammography, and $S_c$ indicates the clinical state or presence of symptoms \cite{Lee1998, Lee2003b}.  The ages at entering $S_p$ and $S_c$ are $x$ and $\tau$, respectively; $\tau-x$ is the sojourn time in $S_p$. 
+
+\paragraph{}The following examples illustrate some possibilities that result from the interaction of the natural history of the disease and the screening process. The times $t_i, i=0,..., n$ indicate when the mammography exams are scheduled. We assume that women attend the exams and that mammogram sensitivity is not 100\%. 
+
+%
+\begin{enumerate}
+\item Before starting the screening exams the woman enters $S_p$ and then $S_c$. 
+
+\begin{displaymath}
+\xymatrix @R=0.3cm @C=0.7cm {
+& & t_0 & t_1 & t_2 &   & t_{n-1} & t_n \\
+\ar@{-}[rr]|{S_p-S_c} & & | \ar@{-}[r] & | \ar@{-}[r] & | \ar@{-}[r] &  /.../ \ar@{-}[r] & | \ar@{-}[r] & | \ar@{->}[r] & \\
+}
+\end{displaymath}
+
+This woman is not included in the study because she is diagnosed of breast cancer before the first screening exam at time $t_0$, with the exception of being misclassified because of sensitivity of mammography lower than 100%.
+%
+
+\item The woman enters $S_p$ before the first screening exam and enters $S_c$ between $t_0$ and $t_1$. 
+
+\begin{displaymath}
+\xymatrix @R=0.3cm @C=0.7cm {
+& & t_0 & t_1 & t_2 &  & t_{n-1} & t_n \\
+\ar@{-}[rr]|{S_p} & & | \ar@{-}[r]|{S_c} & | \ar@{-}[r] & | \ar@{-}[r] & /.../ \ar@{-}[r] & | \ar@{-}[r] & | \ar@{->}[r] & \\
+}
+\end{displaymath}
+
+There are two possibilities: a) an early diagnosis at time $t_0$ where age at entering $S_c$ will not be observed; or b) the mammography exam misses the tumour and it is symptomatically diagnosed at time $t$ between $t_0$ and $t_1$. If a) the tumour is screen-detected, if b) it is the type of interval cancer called \textit{false negative}.
+%
+
+\item The next example corresponds to the type of interval cancer called \textit{true interval}.
+\begin{displaymath}
+\xymatrix @R=0.3cm @C=0.7cm {
+& & t_0 & t_1 & t_2 & t_3 &  & t_{n-1} & t_n \\
+\ar@{-}[rr] & & | \ar@{-}[r]|{S_p-S_c} & | \ar@{-}[r] & | \ar@{-}[r] & | \ar@{-}[r] & /.../ \ar@{-}[r] & | \ar@{-}[r] & | \ar@{->}[r] & \\
+}
+\end{displaymath}
+
+\end{enumerate}
+
+
+\subsection{Time scale, censoring, and late entry}
+\paragraph{}For the time to $S_p$, two time scales can be chosen: time since entry into the screening program, or age. Age is a more relevant time scale, since it directly reflects the biological process. The incidence of pre-clinical cancer since entry additionally also depends on the study design, i.e.\ at what age women enter the study. For time to $S_c$, the same time scale can be chosen, but it may be of more interest to study the sojourn time, i.e.\ time from $S_p$ to $S_c$. In the multi-state theory, this is called the \textit{clock-reset} approach.
+
+\paragraph{}In the data, the transition $S_0 \rightarrow S_p$ is interval censored. We can assume that the transition $S_p \rightarrow S_c$ is either observed exactly or right censored. When the sojourn time is the estimand, such data have been called doubly (interval) censored. The situation is similar to the estimation of time from HIV infection to AIDS. Typically, HIV infection is not observed exactly but only known to lie in the interval between a last HIV negative test and a first HIV positive test. AIDS is usually either observed exactly or right censored.
+
+\paragraph{}In the INCA study not all women entered the screening program at the age of 50. Women that were above 50 when the program started entered only when they had not yet developed symptoms: they had to be free of clinical cancer. Phrased otherwise, women that already developed pre-clinical or clinical cancer before they would enter the screening program are missed. This may give rise to left truncated data.
+  
+\paragraph{}Women that have a pre-clinical cancer detected are treated. As a consequence, the clinical cancer will not occur. This implies that transitions $S_p \rightarrow S_c$ are never observed in these women. This is a form of informative censoring for the estimation of the sojourn time distribution. Women with a short sojourn time are more likely to have an interval cancer, i.e.\  to have the clinical cancer observed instead of the screen detected cancer. In fact, if mammography was 100\% sensitive, women that have a sojourn time of more than two years will always be censored at the first screening visit at which the pre-clinical cancer is observed. 
+
+\paragraph{}Estimation of the distribution of age at pre-clinical cancer may still be possible. However, if we use the time of interval cancer as right hand side of the detection interval, the observation times are no longer independent of the event times. An alternative to explore is to set the right hand side at the time at which the first subsequent screening exam would be performed, even though this was not actually done.
+
+
+\subsection{A Markov multi-state model for breast cancer screening}
+
+\paragraph{}A Markov multi-state model describes how individuals move between a series of states in continuous time \cite{Jackson2011, Geskus2016}. In a Markov model, the next state and the time at which the transition occurs only depends on the present state \cite{Putter2007}. A change of state is called a transition, or an event. Transition intensities that may depend on time $t$, or also on a set of covariates $z(t)$, represent the instantaneous risk or hazard of moving from state $r$ to state $s \neq r$
+
+\[q_{rs}(t;z(t)) =  \underset{\delta t \rightarrow 0} {\lim}\frac{P(S(t+\delta t) = s | S(t) = r, z(t))}{\delta t}.\]
+
+where $S(t)$ indicates the state of an individual at time $t$.
+
+
+\subsection{Statistical analysis}
+
+\paragraph{} We used three approaches to analyse the INCA-CAT data, 1) the multi-state model, 2) the Cox model, which is the more frequently used in the literature to assess risk factors of breast cancer, and 3) the discrete-time model which also has been used in similar studies \cite{Blanch2013, Ripping2016}.
+
+\paragraph{} When using the multi-state model, we started with a 3-state model and assumed that a) the transition intensity $S_0 \rightarrow S_p$ increases with age, as it does incidence of breast cancer; b) the time at entering $S_p$ is interval censored between the time of a negative exam and the time of breast cancer diagnosis; c) the time at entering $S_c$ is exact for women with IC and is right censored for women with SD cancer; d) there are censored states due to the sensitivity of the mammogram being lower than 100\%; e) false-positive result in the screening mammogram is a time-dependent covariate that is measured as 0 in the absence of a false positive result and 1 from the time of the first false positive result. With this model we estimated the effect of a FP result on the time to entering $S_p$. Then, we considered a 2-state model where the event was BC diagnosis (SC or IC) and compared the effect of FP on BC diagnosis if the IC was detected between screens or in the next screen. The {\tt msm} package for {\tt R} \cite{Jackson2011} was used for the multi-state analyses.
+
+\paragraph{} When using the Cox or the discrete-time models, we also performed different analyses. First, we applied a cause-specific strategy for SD and IC, separately, as in competing risks analysis. For each cause-specific model, the competing event was censored. Second, we considered that the event was breast cancer diagnosis, either SD or IC. We estimated the effect of a FP result in two scenarios, considering the exact age at the IC diagnosis and assuming that the IC cancer was diagnosed in the next screening exam.
+
+\paragraph{} In addition, we conducted a simulation study to explore the performance of the different models for measuring the effect of a false positive result on risk of breast cancer. We were interested in assessing two sources of bias, first the one that arises from the assumptions of the statistical models and then the bias that originates when the statistical models are applied to data only partially observed due to the screening process. We worked with two types of simulated datasets, 1) the \textit{complete data} type which contains all the information on the natural history of breast cancer, and 2) the \textit{observed data} type which contains the partially observed data as a consequence of the screening.
+

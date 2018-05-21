@@ -1,0 +1,80 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{fancyref}
+\usepackage{graphicx}
+\graphicspath{ {/home/jordi/Dropbox/INCA/articulo competing risks} }
+\author{Jordi Blanch i Montse Ru\'e}
+\title{False positive results in previous exams and risk of screen-detected or interval breast cancer. A comparison of time-to-event approaches}
+
+
+\begin{document}
+\section{Introduction}
+The assessment of breast cancer screening programs traditionally has been based on cross-sectional indicators like rates of cancer detection, false-positive results, or interval cancer -emerging after negative tests and before the next invitation-, and estimates of sensitivity and specificity at specific time periods (one or two years, a screening round, etc). Cross-sectional measures are limited, however, by the fact that they do not capture changes over time that may be associated to the risk of developing breast cancer. In contrast, longitudinal studies of women attending breast cancer screening may assess how past and current information on risk factors affect the risk of developing breast cancer.
+
+\paragraph{}In breast cancer screening research, longitudinal data methods were initially applied to estimate the cumulative rates of false-positive results (ref Elmore, Hubbard, Hofvind, Castells-JECH, Roman-AnnOnco). Later on, longitudinal data analyses have been used to study 1) frequency of screen-detected cancers over several rounds (hofvind2006, Blanch-BCRT), 2) the effect of previous false-positive results on detection rate (von Euler-Chaplin. Castells-Roman), and 3) determinants of interval cancer  (blanch, hovfind2006). 
+
+\paragraph{}In a previous work, we studied the determinants of screen-detected cancer and interval cancer. We analyzed screen-detected and interval cancers as independent causes of failure, but SDC and IC are the same disease in different stages (pre-clinical or clinical). So, it is better analisys the data using multi-state analysis as Uhry et al or Ventura et al.
+
+\paragraph{}Sobre els aplicacio dels models multi-estat al cribratge i particularment en el cribratge de CM.
+
+\paragraph{}The paper is organized as follows. Section 2 describes the motivating dataset. In section 3, we explained the simulated data and the statistical model proposals. Section 4 presents the results of the simulation study. Section 5 contains the discussion and conclusions.
+
+
+\section{Motivating data: the INterval CAncer (INCA) study}
+The aim of the INCA study was to assess the determinants of interval breast cancer in women attending early detection programs in Spain (ref). Interval cancers are symptomatic cancers that appear between two screening exams or during a period after the last screening exam. The INCA study also compared the characteristics and factors associated with screen-detected and interval breast cancers. We selected a subset of the INCA dataset, corresponding to 4 radiology units of the Catalonia region (ref), the INCA-CAT dataset. 
+
+\paragraph{}Population-based breast cancer screening in Catalonia is offered biennially to all women aged 50-69 years. Screening mammography has three possible outcomes: 1) negative result (normal), 2) positive result (abnormal findings requiring further assessments), and 3) early recall (an intermediate mammogram is performed out of sequence with the screening interval, at 6 or 12 months). Cancers detected at intermediate mammogram were considered screen-detected cancers (Perry).
+
+\paragraph{}A positive result is considered to be a screen-detected tumour if, after further assessments, there is histopathological confirmation of cancer. Otherwise, the result is considered false-positive and the woman is invited again after two years. Further assessments can include non-invasive procedures (magnetic resonance imaging, ultrasonography, additional mammography) and/or invasive (fine-needle aspiration cytology, core-needle biopsy and open biopsy). 
+
+\paragraph{}Interval cancer was defined as ``a primary breast cancer arising after a negative screening episode and before the next invitation to screening or within 24 months for women who reached the upper age limit" (Perry). We extended the definition until the 30th month, because we allowed a 6 month margin for women to attend each round. Interval cancers were identified by merging data from the registers of screening programmes with population-based cancer registries (Navarro), the regional Minimum Data Set (based on hospital discharges with information on the main diagnosis) and hospital-based cancer registries.
+
+\paragraph{}The INCA-CAT dataset consists of a retrospective cohort of 96,636 women who underwent mammography exams between January 1, 2000 and December 31, 2006, and were followed-up until June 30, 2009 for interval cancer assessment. These women underwent a total of 230,742 screening mammograms. During the study period, 963 cancers were detected in routine screening mammograms, of which 671 were detected in successive participations, and 313 emerged as interval cancers. Both invasive and \textit{in situ} breast cancer carcinomas are included. 
+
+\paragraph{Data features}To analysis the INCA-CAT dataset, we assume that
+\begin{itemize}
+\item Right censoring of clinical stage: All woman will have a clinical breast cancer.
+\item Interval censoring of pre-clinical stage: The time to enter in the pre-clinical stage occurs between to participations.
+\item Left truncation: All woman are invited to participate from 50 years, but not all come in their first invitation or they started the screening before the beginning of the study.
+\item Informative censoring of the sojourn time: Women with SDC was treated and the time between pre-clinical to clinical cancer is not observed. It is a problem, because women with a short sojourn time are more likely to have an IC and women with a sojourn time longer than 2 years will always be censored.
+\end{itemize}
+
+\section{Methods}
+\subsection{Definition of pre-clinical and clinical cancer time}
+For the time to pre-clinical cancer, two time scales can be chosen: time since entry into the screening program, or age. Age is a more relevant time scale, since it directly reflects the biological process. The incidence of pre-clinical cancer since entry additionally also depends on the study design, i.e. at what age women enter the study. For clinical cancer, the same time scale can be chosen, but it may be of more interest to study the sojourn time, i.e. time from pre-clinical cancer to clinical cancer. In the multi-state theory, this is called the clock-reset approach.
+
+\subsection{Late entry}
+\paragraph{}We make two analysis without and with late entry.
+
+\subsection{Estimation of pre-clinical time distribution}
+To estimate the pre-clinical time distribution, we restrict to the first transition ($S_0$ to $S_p$). We simulate two scenarios: 
+\begin{itemize}
+\item The IC is the right hand side of the interval of transition to pre-clinical cancer.
+\item Extend the follow-up to the subsequent screening date in case an IC occurs.
+\end{itemize}
+
+\paragraph{}In this two scenarios, we estimate the effect via \textmd{Survival} or \textmd{msm} package.
+
+\subsection{Estimation of the sojourn time}
+\paragraph{}Utilitzar un model de tres estats S0->Sp->Sc. Comparar diferents estrategies i estimar el biaix.
+
+\section{Results}
+\subsection{Simulation study: Generation}
+We perform a 5,000 simulations of 15,000 screened women with a maximum of 4 participations. We assume that the $S_p\sim \exp(0.002)$, $S_c \sim\exp(0.4)$ and late entry $T_{enter}\sim U(0,15)$. 
+
+\subsection{Simulation study: Pre-clinical time distribution}
+
+\subsection{Simulation study: Sojourn time distribution}
+
+\subsection{Aplication in INCA-CAT}
+
+\section{Discussion}
+
+\section{Conclusion}
+
+\section{References}
+
+\end{document}
